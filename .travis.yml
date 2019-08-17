@@ -1,0 +1,32 @@
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+  - "8.2.1"
+
+install:
+  - npm install newman
+
+services:
+  - docker
+
+env:
+  DOCKER_COMPOSE_VERSION: 1.24.1
+
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+before_script:
+  - docker-compose up -d --build
+  - node --version
+  - npm --version
+  - node_modules/.bin/newman --version
+
+script:
+  - node_modules/.bin/newman run tests/ClubCTF_Platform.postman_collection.json
+
+after_script:
+  - docker-compose down

@@ -1,0 +1,38 @@
+version: "3"
+services:
+  php:
+    build: './php/'
+    container_name: TP_CTF_PHP
+    networks:
+      - backend
+    volumes:
+      - ./public_html/:/var/www/html/
+
+  apache:
+    build: './apache/'
+    container_name: TP_CTF_apache
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - frontend
+      - backend
+    ports:
+      - "8082:80"
+    volumes:
+      - ./public_html/:/var/www/html/
+
+  mysql:
+    image: mysql:5.6.40
+    container_name: TP_CTF_mysql
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=TP_CTF
+    volumes:
+      - ./mysql/:/docker-entrypoint-initdb.d
+
+networks:
+  frontend:
+  backend:

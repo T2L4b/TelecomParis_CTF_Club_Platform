@@ -1,0 +1,182 @@
+{
+	"info": {
+		"_postman_id": "7ecc2e8c-300c-4ae8-a4e5-05b0829a4add",
+		"name": "ClubCTF_Platform",
+		"description": "Postman test collection for the TP_CTF_Club of the ClubCTF_Platform.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User_Create_Success",
+					"item": [
+						{
+							"name": "Users_Create",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "657236ca-3961-40c0-9974-8c82549dd839",
+										"exec": [
+											"pm.test(\"Status code is 201\", function () { pm.response.to.have.status(201); });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"api_key\" : \"7ce3e5ecc26c1a11a375e9c3f93ddd9b\",\n    \"pseudo\" : \"test_pseudo\",\n    \"hash\" : \"DE4E96582B3A474B66C7021C029597F7\",\n    \"phone\" : \"0612345678\",\n    \"mail\" : \"api@test.com\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8082/api/user/create.php",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"user",
+										"create.php"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "User_Read_Success",
+					"item": [
+						{
+							"name": "Users_ReadCurrent",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "657236ca-3961-40c0-9974-8c82549dd839",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "93ee930d97e38d57a68X41b46ebec6e961a",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "APIKEY",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8082/api/user/read_current.php",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"user",
+										"read_current.php"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Challenges",
+			"item": [
+				{
+					"name": "Challenges_ReadCurrent",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c31723ad-2080-4882-a99d-82cb5658222a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/challenge/read_current.php?idChall=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"challenge",
+								"read_current.php"
+							],
+							"query": [
+								{
+									"key": "idChall",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
