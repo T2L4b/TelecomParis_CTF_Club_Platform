@@ -1,6 +1,13 @@
-# ClubCTF_Platform [CURRENTLY BEING DEV]
+<div align="center">
 
-Main website of Telecom Paris CTF club.
+# :construction: ClubCTF_Platform [DEV]
+
+[![License](https://img.shields.io/badge/license-AGPLv3-blue.svg?style=flat)](https://github.com/T2L4b/TelecomParis_CTF_Club_Platform/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/T2L4b/TelecomParis_CTF_Club_Platform.svg?branch=master)](https://travis-ci.org/T2L4b/TelecomParis_CTF_Club_Platform)
+
+**Main website of Telecom Paris CTF club.**
+
+</div>
 
 # ToDoList
 
@@ -16,6 +23,7 @@ Main website of Telecom Paris CTF club.
 ### Infra
 
 * Add Traefik HTTPS reverse-proxy + Let's Encrypt.
+* Add SonarCloud.
 
 ### Database
 
