@@ -22,7 +22,7 @@ class Challenge
     }
 
     // read challenge
-    function readCurrent() {
+    function read() {
         // only the required fields should be displayed to the user
         // limit to 1 even if idChall is a unique identifier
         $query = "SELECT idChall, title, type, statement, points, difficulty, author FROM " . $this->table_name . " WHERE idChall LIKE :idChall LIMIT 1";
@@ -34,6 +34,20 @@ class Challenge
 
         // bind param
         $stmt->bindParam(":idChall", $this->idChall);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+    // read all challenges
+    function readAll() {
+        // only the required fields should be displayed to the user
+        $query = "SELECT idChall, title, type FROM " . $this->table_name;
+
+        // prepare query statement
+        $stmt = $this->PDO->prepare($query);
 
         // execute query
         $stmt->execute();

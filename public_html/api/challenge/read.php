@@ -12,14 +12,14 @@ include_once '../objects/challenge.php';
 $conn = new SPDO();
 $challenge = new challenge($conn->getConnection());
 
-// get body posted data
+// get data from url
 $chall = $_GET['idChall'];
 // make sure data is not empty
 if (!(empty($chall))) {
   // set challenge property values
   $challenge->idChall = $chall;
   // read current challenge
-  $stmt = $challenge->readCurrent();
+  $stmt = $challenge->read();
   $num  = $stmt->rowCount();
 
   // check if more than 0 record found
