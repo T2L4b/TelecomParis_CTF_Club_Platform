@@ -1,15 +1,20 @@
 <div align="center">
 
-# :construction: ClubCTF_Platform [DEV]
+<img src="https://github.com/T2L4b/TelecomParis_CTF_Club_Platform/blob/master/public_html/views/img/logo.png" alt="Wiki.js" width="500" />
+
+# :construction: ClubCTF_Platform :construction:
 
 [![License](https://img.shields.io/badge/license-AGPLv3-blue.svg?style=flat)](https://github.com/T2L4b/TelecomParis_CTF_Club_Platform/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/T2L4b/TelecomParis_CTF_Club_Platform.svg?branch=master)](https://travis-ci.org/T2L4b/TelecomParis_CTF_Club_Platform)
 
 **Main website of Telecom Paris CTF club.**
 
+**Born in August :two::zero::one::nine:** 
+
+
 </div>
 
-# ToDoList
+# Feel free to contribute - ToDoList
 
 ## Front
 
@@ -23,7 +28,7 @@
 ### Infra
 
 * Add Traefik HTTPS reverse-proxy + Let's Encrypt.
-* Add SonarCloud.
+* Add SonarCloud qualitygate, maintainability, security.
 
 ### Database
 
