@@ -35,7 +35,7 @@ class User
         $this->phone   = htmlspecialchars(strip_tags($this->phone));
         $this->mail    = htmlspecialchars(strip_tags($this->mail));
         // sanitize if status isn't a default setting!
-        $this->status  = $this->status;
+        //$this->status  = $this->status;
 
         // bind values
         $stmt->bindParam(":api_key", $this->api_key);

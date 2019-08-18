@@ -1,4 +1,7 @@
 <?php
+// API Array key returned message
+define("API_INFO", "message");
+
 // required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -18,11 +21,11 @@ $data = json_decode(file_get_contents("php://input"));
 // make sure data is not empty
 if(! (empty($data->api_key) && empty($data->pseudo) && empty($data->hash) && empty($data->phone) && empty($data->mail))) {
     // set user property values
-    $user->api_key   = $data->api_key;
-    $user->pseudo    = $data->pseudo;
-    $user->hash      = $data->hash;
-    $user->phone     = $data->phone;
-    $user->mail      = $data->mail;
+    $user->api_key = $data->api_key;
+    $user->pseudo  = $data->pseudo;
+    $user->hash    = $data->hash;
+    $user->phone   = $data->phone;
+    $user->mail    = $data->mail;
     
     // create the user
     if($user->create()){
@@ -30,7 +33,7 @@ if(! (empty($data->api_key) && empty($data->pseudo) && empty($data->hash) && emp
         http_response_code(201);
  
         // tell the user
-        echo json_encode(array("message" => "User was created."));
+        echo json_encode(array(API_INFO => "User was created."));
 
     // if unable to create the user, tell the user
     } else{
@@ -38,14 +41,14 @@ if(! (empty($data->api_key) && empty($data->pseudo) && empty($data->hash) && emp
         http_response_code(503);
  
         // tell the user
-        echo json_encode(array("message" => "Unable to create user."));
+        echo json_encode(array(API_INFO => "Unable to create user."));
     }
 } else{ // tell the user data is incomplete
     // set response code - 400 bad request
     http_response_code(400);
  
     // tell the user
-    echo json_encode(array("message" => "Unable to create user, data is incomplete."));
+    echo json_encode(array(API_INFO => "Unable to create user, data is incomplete."));
 }
 
 ?>
