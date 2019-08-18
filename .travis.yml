@@ -14,8 +14,7 @@ addons:
   sonarcloud:
     organization: "telecomparisctf"
     token:
-      secure: "WVzi9DYPyrcgTgQnSuTeeJG26cbK8A5HaCKSMpw2PVKZmaCzK9w7+xqLR3as2tGgyxFWudPHB7J1TWFVidROaM1KNyDNG2ulMOvcbkEZPwkbCHQlywFJ9bIdgZfZz8YQIFLNTNL+DyBC/+Vf8xyEb+/XC+sb7fwPuWywDqVgnWYM1EXraVYAm+YUY5gM1mx1yMuhvrfd3rqg9yNJpRWUDKlqMPGHCtDLpNDWoiAjDP56ZXjhR2t/ut+RcNMmyBZe7+mX07EnmfIjjSm8zyJq/N8FL6qBZtVmOHQPs+cHrQJfMhDs9VOEP4wmb0n5lVNxeBoYNR9746+liAYZ5yec/WSHECE0pfFpwu2C9WpA96svMWto7PvTVC7752bvOXVFPYqyCFmHi6N4+3YlVU/OYe3+XrGstNiHrMnNJ/Jaald37liCgAc2tsv35y6a6/4fRdB2x79wIho/1eU9HKx52blzy7Pf7yuoXlOV9DRb74dov2jkJRieVJTOusCroeC1Sqsp95zhwctxhvKXpshIPEIWZbWhjXxR4nOkxIa/8V6j4t2BDm6P+AwEPwjhKUPL3ruMSLh4dbn4VkKn+CEwVxuD+N37cFFvMbn0uAdP/tdtrZHcuibp+UyV36q6tX26yxMlBAaBRdt71Lt5YgQ3NlFL6OSpzVwjE8gY19sUOzU="
-
+      secure: "OSOnRh8NXuu+QVFFmn8t6RtXsKEvHcJJGvHJG7RhDSfWa8BGJWAKLbRhJphBfgxLyVTBmK1JY3dSv8elfWR7Ypbc3LozWCkQSWOKwMS2T7f3si3Ful9VOfFOA5bxg8DlafYVVh8LDgpobVADMhj6jsXkwN/VSxE3jZpE8hnnTXgDTOasWTE2/FVJ1yOaERTCO3WVTDEF8iHPSrbUrLVt7Ir6tIgkVgZOwsTBCxcb57sf+TCYWmn0tmBLjYXhCpKI2z6gRU7CmUdI9mX96qyMeh2LtXjWQdoC1a/RNCkBzDNjJJfwR+2MiMY/PXOhafKEsTP+8WV6KZJGicHTJ2MPksauesMRHPtrxx/SPekhHctmV9fcq+o5kyOwv/giXkb82eAYiBdUl9TJXIF28hXszFtlsExOLOurOzseV3Tgky3ZCHTlRPpgQ3UMR1HO7+1UcchPNuFrEGbwTZxHqitPAPUpyq6SMYv4x9sPZiR2wmhI7h6JRH+4TuhYCnq2FpX/yQ5vv9MhvgcjGZ1VqBu7u27LEFTwnjj8cwHJuO73znvW0VRKCU+kewLisqyyX0nkqPyjfBL1VtczDKZBTV50GU7aOcwxtMxWtH34OXZj+kNeM/sg2HbLI2jj+Eq2vh23+ITQrl8QRsb3qrdVgarHhujP0A76tsiHqyWffShu27g="
 
 env:
   DOCKER_COMPOSE_VERSION: 1.24.1
@@ -35,10 +34,6 @@ before_script:
 script:
   - node_modules/.bin/newman run tests/ClubCTF_Platform.postman_collection.json
   - sonar-scanner
-
-cache:
-  directories:
-    - '$HOME/.sonar/cache'
 
 after_script:
   - docker-compose down
