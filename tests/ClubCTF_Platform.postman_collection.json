@@ -280,13 +280,10 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "http://192.168.99.100:8082/api/challenge/read_current.php?",
+									"raw": "http://localhost:8082/api/challenge/read_current.php?",
 									"protocol": "http",
 									"host": [
-										"192",
-										"168",
-										"99",
-										"100"
+										"localhost"
 									],
 									"port": "8082",
 									"path": [
