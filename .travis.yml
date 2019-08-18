@@ -10,6 +10,13 @@ install:
 services:
   - docker
 
+addons:
+  sonarcloud:
+    organization: "telecomparisctf"
+    token:
+      secure: "WVzi9DYPyrcgTgQnSuTeeJG26cbK8A5HaCKSMpw2PVKZmaCzK9w7+xqLR3as2tGgyxFWudPHB7J1TWFVidROaM1KNyDNG2ulMOvcbkEZPwkbCHQlywFJ9bIdgZfZz8YQIFLNTNL+DyBC/+Vf8xyEb+/XC+sb7fwPuWywDqVgnWYM1EXraVYAm+YUY5gM1mx1yMuhvrfd3rqg9yNJpRWUDKlqMPGHCtDLpNDWoiAjDP56ZXjhR2t/ut+RcNMmyBZe7+mX07EnmfIjjSm8zyJq/N8FL6qBZtVmOHQPs+cHrQJfMhDs9VOEP4wmb0n5lVNxeBoYNR9746+liAYZ5yec/WSHECE0pfFpwu2C9WpA96svMWto7PvTVC7752bvOXVFPYqyCFmHi6N4+3YlVU/OYe3+XrGstNiHrMnNJ/Jaald37liCgAc2tsv35y6a6/4fRdB2x79wIho/1eU9HKx52blzy7Pf7yuoXlOV9DRb74dov2jkJRieVJTOusCroeC1Sqsp95zhwctxhvKXpshIPEIWZbWhjXxR4nOkxIa/8V6j4t2BDm6P+AwEPwjhKUPL3ruMSLh4dbn4VkKn+CEwVxuD+N37cFFvMbn0uAdP/tdtrZHcuibp+UyV36q6tX26yxMlBAaBRdt71Lt5YgQ3NlFL6OSpzVwjE8gY19sUOzU="
+
+
 env:
   DOCKER_COMPOSE_VERSION: 1.24.1
 
@@ -27,6 +34,11 @@ before_script:
 
 script:
   - node_modules/.bin/newman run tests/ClubCTF_Platform.postman_collection.json
+  - sonar-scanner
+
+cache:
+  directories:
+    - '$HOME/.sonar/cache'
 
 after_script:
   - docker-compose down
