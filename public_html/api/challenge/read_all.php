@@ -12,7 +12,6 @@ include_once '../objects/challenge.php';
 $conn = new SPDO();
 $challenge = new challenge($conn->getConnection());
 
-
 // read all challenges
 $stmt = $challenge->readAll();
 $num  = $stmt->rowCount();
