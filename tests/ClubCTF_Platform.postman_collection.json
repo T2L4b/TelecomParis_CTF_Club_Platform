@@ -197,7 +197,7 @@
 									"script": {
 										"id": "c31723ad-2080-4882-a99d-82cb5658222a",
 										"exec": [
-											"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(404); });"
+											"pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });"
 										],
 										"type": "text/javascript"
 									}
@@ -253,7 +253,7 @@
 									"script": {
 										"id": "c31723ad-2080-4882-a99d-82cb5658222a",
 										"exec": [
-											"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(400); });"
+											"pm.test(\"Status code is 400\", function () { pm.response.to.have.status(400); });"
 										],
 										"type": "text/javascript"
 									}
@@ -280,7 +280,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "http://localhost:8082/api/challenge/read_current.php?",
+									"raw": "http://localhost:8082/api/challenge/read.php",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -289,7 +289,7 @@
 									"path": [
 										"api",
 										"challenge",
-										"read_current.php"
+										"read.php"
 									]
 								}
 							},
