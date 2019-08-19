@@ -24,8 +24,18 @@ CREATE TABLE IF NOT EXISTS `CHALLENGES` (
   `points` int NOT NULL,
   `difficulty` ENUM('Accessible', 'Intermédiaire', 'Difficile', 'Hardcore') NOT NULL,
   `flag` VARCHAR(255) NOT NULL,
-  `author` VARCHAR(25) NOT NULL,
   PRIMARY KEY (`idChall`));
 
-INSERT INTO `CHALLENGES` (`type`,`title`,`statement`,`points`,`difficulty`, `flag`, `author`) VALUES
-('web', 'Code source', 'La première chose à faire' , '5', 'Difficile', 'ctvrementfacillol', 'JackPepper');
+INSERT INTO `CHALLENGES` (`type`,`title`,`statement`,`points`,`difficulty`, `flag`) VALUES
+('web', 'Code source', 'La première chose à faire' , '5', 'Difficile', 'ctvrementfacillol');
+
+-- -----------------------------------------------------
+-- Table `AUTHORS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AUTHORS` (
+  `idChall` int NOT NULL,
+  `pseudo` VARCHAR(25) NOT NULL,
+  PRIMARY KEY (`idChall`, `pseudo`));
+
+INSERT INTO `AUTHORS` (`idChall`,`pseudo`) VALUES
+('1',  'JackPepper');

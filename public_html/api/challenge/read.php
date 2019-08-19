@@ -37,8 +37,7 @@ if (!(empty($chall))) {
         "type"        => $type,
         "statement"   => $statement,
         "points"      => $points,
-        "difficulty"  => $difficulty,
-        "author"      => $author
+        "difficulty"  => $difficulty
       );
 
       array_push($challenge_arr, $challenge_item);
