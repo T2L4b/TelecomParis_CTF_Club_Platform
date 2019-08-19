@@ -9,8 +9,10 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
+// include database and object files
 include_once '../config/SPDO.php';
 include_once '../objects/user.php';
+
 // prepare connexion and instantiate user object
 $conn = new SPDO();
 $user = new User($conn->getConnection());
@@ -24,8 +26,8 @@ if(! (empty($data->api_key) && empty($data->pseudo) && empty($data->hash) && emp
     $user->api_key = $data->api_key;
     $user->pseudo  = $data->pseudo;
     $user->hash    = $data->hash;
-    $user->phone   = $data->phone;
     $user->mail    = $data->mail;
+    $user->phone   = $data->phone;
     
     // create the user
     if($user->create()){

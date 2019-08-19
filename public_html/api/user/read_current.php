@@ -6,8 +6,10 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
+// include database and object files
 include_once '../config/SPDO.php';
 include_once '../objects/user.php';
+
 // prepare connexion and instantiate user object
 $conn = new SPDO();
 $user = new User($conn->getConnection());
@@ -34,11 +36,12 @@ if ($num > 0) {
 
     // password hash not provided [ON PURPOSE]
     $user_item = array(
-      "api_key" => $api_key,
       "pseudo"  => $pseudo,
+      "api_key" => $api_key,
       "phone"   => $phone,
       "mail"    => $mail,
-      "status"  => $status
+      "status"  => $status,
+      "score"  => $score
     );
 
     array_push($user_arr["records"], $user_item);
