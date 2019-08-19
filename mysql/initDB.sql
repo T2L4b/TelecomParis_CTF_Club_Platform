@@ -38,4 +38,4 @@ CREATE TABLE IF NOT EXISTS `AUTHORS` (
   PRIMARY KEY (`idChall`, `pseudo`));
 
 INSERT INTO `AUTHORS` (`idChall`,`pseudo`) VALUES
-('1',  'JackPepper');
+('1', 'JackPepper');

@@ -8,9 +8,11 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include_once '../config/SPDO.php';
 include_once '../objects/challenge.php';
+include_once '../objects/author.php';
 // prepare connexion and instantiate challenge object
 $conn = new SPDO();
 $challenge = new challenge($conn->getConnection());
+$author = new author($conn->getConnection());
 
 // get data from url
 $chall = $_GET['idChall'];
@@ -24,30 +26,34 @@ if (!(empty($chall))) {
 
   // check if more than 0 record found
   if ($num > 0) {
-    // challenge array
-    $challenge_arr = array();
 
     // retrieve our table contents: fetch() is faster than fetchAll()
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      extract($row);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    extract($row);
 
-      $challenge_item = array(
-        "idChall"     => $idChall,
-        "title"       => $title,
-        "type"        => $type,
-        "statement"   => $statement,
-        "points"      => $points,
-        "difficulty"  => $difficulty
-      );
+    // retrive challenge infos
+    $challenge_item = array(
+      "idChall"     => $idChall,
+      "title"       => $title,
+      "type"        => $type,
+      "statement"   => $statement,
+      "points"      => $points,
+      "difficulty"  => $difficulty
+    );
 
-      array_push($challenge_arr, $challenge_item);
+    // retrieve author(s)
+    $author->idChall = $idChall;
+    $author_stmt = $author->readAuthors();
+    $challenge_item["authors"] = array();
+    while ($author_row = $author_stmt->fetch(PDO::FETCH_ASSOC)) {
+      array_push($challenge_item["authors"], $author_row["pseudo"]);
     }
 
     // set response code - 200 OK
     http_response_code(200);
 
     // show products data in json format
-    echo json_encode($challenge_arr);
+    echo json_encode($challenge_item);
 
   } else {
     // set response code - 404 Not found
