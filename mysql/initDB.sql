@@ -4,14 +4,15 @@
 CREATE TABLE IF NOT EXISTS `USERS` (
   `pseudo` VARCHAR(25) NOT NULL,
   `api_key` VARCHAR(35) NOT NULL,
+  `key_validity` TIMESTAMP NOT NULL,
   `hash` VARCHAR(35) NOT NULL,
   `phone` VARCHAR(12) NOT NULL,
   `mail` VARCHAR(50) NOT NULL,
   `status` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`pseudo`));
 
-INSERT INTO `USERS` (`api_key`,`pseudo`,`hash`,`phone`,`mail`, `status`) VALUES
-('93ee930d97e38d57a68X41b46ebec6e961a', 'R00T', '1a1dc91c907325c69271ddf0c944bc72' , '0123456789', 'titouan.veauvy@telecom-paristech.fr', 'Administrator');
+INSERT INTO `USERS` (`api_key`, `key_validity`, `pseudo`, `hash`, `phone`, `mail`, `status`) VALUES
+('93ee930d97e38d57a68X41b46ebec6e961a', CURRENT_TIMESTAMP, 'R00T', '1a1dc91c907325c69271ddf0c944bc72' , '0123456789', 'titouan.veauvy@telecom-paristech.fr', 'Administrator');
 
 -- -----------------------------------------------------
 -- Table `CHALLENGES`
