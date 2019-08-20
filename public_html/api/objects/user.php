@@ -83,11 +83,13 @@ class User {
         // if last element do not add comma (query syntax)
         $lastField = end($fields);
 
-        foreach ($fields as $key)
-            if ($key == $lastField)
+        foreach ($fields as $key) {
+            if ($key == $lastField) {
                 $query .= $key . " = :" . $key;
-            else
+            } else {
                 $query .= $key . " = :" . $key . ", ";
+            }
+        }
         
         $query .= " WHERE api_key LIKE :old_api_key LIMIT 1";
         
