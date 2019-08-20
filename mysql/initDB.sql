@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `USERS` (
   `pseudo` VARCHAR(25) NOT NULL,
   `api_key` VARCHAR(35) NOT NULL,
   `key_validity` DATETIME NOT NULL,
-  `hash` VARCHAR(35) NOT NULL,
+  `hash` VARCHAR(255) NOT NULL,
   `mail` VARCHAR(50) NOT NULL,
   `phone` VARCHAR(12) NOT NULL,
   `status` ENUM('Member', 'Administrator', 'Author') NOT NULL,
