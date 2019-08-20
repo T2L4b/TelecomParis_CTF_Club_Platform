@@ -1,5 +1,7 @@
 <?php
 class User {
+    const APIKEYBind = ':api_key';
+
     // database connection and table name
     private $PDO;
     private $table_name = "USERS";
@@ -22,7 +24,7 @@ class User {
     // create user
     function create() {
         // query to insert record
-        $query = "INSERT INTO " . $this->table_name . " (pseudo, api_key, key_validity, hash, mail, phone, status, score) VALUES (:pseudo, :api_key, :key_validity, :hash, :mail, :phone, :status, :score)";
+        $query = "INSERT INTO " . $this->table_name . " (pseudo, api_key, key_validity, hash, mail, phone, status, score) VALUES (:pseudo, " . self::APIKEYBind . ", :key_validity, :hash, :mail, :phone, :status, :score)";
 
         // prepare query
         $stmt = $this->PDO->prepare($query);
@@ -40,7 +42,7 @@ class User {
 
         // bind values
         $stmt->bindParam(":pseudo", $this->pseudo);
-        $stmt->bindParam(":api_key", $this->api_key);
+        $stmt->bindParam(self::APIKEYBind, $this->api_key);
         $stmt->bindParam(":key_validity", $this->key_validity);
         $stmt->bindParam(":hash", $this->hash);
         $stmt->bindParam(":phone", $this->phone);
@@ -59,7 +61,7 @@ class User {
     function readCurrent() {
         // only the required fields should be displayed to the user
         // limit to 1 even if pseudo is a unique identifier
-        $query = "SELECT pseudo, api_key, phone, mail, status, score FROM " . $this->table_name . " WHERE api_key LIKE :api_key LIMIT 1";
+        $query = "SELECT pseudo, api_key, phone, mail, status, score FROM " . $this->table_name . " WHERE api_key LIKE " . self::APIKEYBind . " LIMIT 1";
 
         // prepare query statement
         $stmt = $this->PDO->prepare($query);
@@ -68,7 +70,7 @@ class User {
         $this->api_key = htmlspecialchars(strip_tags($this->api_key));
 
         // bind param
-        $stmt->bindParam(":api_key", $this->api_key);
+        $stmt->bindParam(self::APIKEYBind, $this->api_key);
 
         // execute query
         $stmt->execute();
@@ -117,7 +119,7 @@ class User {
     // check if user api_key is valid
     function gotValidKey() {
 
-        $query = "SELECT key_validity FROM " . $this->table_name . " WHERE api_key LIKE :api_key LIMIT 1";
+        $query = "SELECT key_validity FROM " . $this->table_name . " WHERE api_key LIKE " . self::APIKEYBind . " LIMIT 1";
         
         // prepare query statement
         $stmt = $this->PDO->prepare($query);
@@ -126,13 +128,13 @@ class User {
         $this->api_key = htmlspecialchars(strip_tags($this->api_key));
         
         // bind param
-        $stmt->bindParam(":api_key", $this->api_key);
+        $stmt->bindParam(self::APIKEYBind, $this->api_key);
         
         // execute query
         $stmt->execute();
+
         $num  = $stmt->rowCount();
-        if ($num < 1)
-            return false;
+        if ($num < 1) { return false; }
 
         // fetch result
         $row = $stmt->fetch(PDO::FETCH_ASSOC);

@@ -1,13 +1,16 @@
 <?php
+// auth header key
+define("AUTHKEY", "HTTP_APIKEY");
+
 // include database and object files
 include_once '../config/SPDO.php';
 include_once '../objects/user.php';
 
-if (isset($_SERVER['HTTP_APIKEY']) && (!empty($_SERVER['HTTP_APIKEY']))) {
+if (isset($_SERVER[AUTHKEY]) && (!empty($_SERVER[AUTHKEY]))) {
     // prepare connexion and instantiate user object
     $conn = new SPDO();
     $user = new User($conn->getConnection());
-    $user->api_key = $_SERVER['HTTP_APIKEY'];
+    $user->api_key = $_SERVER[AUTHKEY];
     
     if (!$user->gotValidKey()) {
         // set response code - 401 unauthorized
