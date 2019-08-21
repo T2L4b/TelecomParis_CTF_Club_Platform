@@ -8,6 +8,10 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include_once '../config/SPDO.php';
 include_once '../objects/challenge.php';
+
+$CHALL_CRYPTO = "crypto";
+$CHALL_WEB = "web";
+
 // prepare connexion and instantiate challenge object
 $conn = new SPDO();
 $challenge = new challenge($conn->getConnection());
@@ -20,8 +24,8 @@ $num  = $stmt->rowCount();
 if ($num > 0) {
     // challenge array
     $challenge_arr = array();
-    $challenge_arr["web"] = array();
-    $challenge_arr["crypto"] = array();
+    $challenge_arr[$CHALL_WEB] = array();
+    $challenge_arr[$CHALL_CRYPTO] = array();
 
     // retrieve our table contents: fetch() is faster than fetchAll()
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -34,11 +38,13 @@ if ($num > 0) {
 
         // put the challenge in the appropriate array
         switch ($type) {
-            case "web":
-            array_push($challenge_arr["web"], $challenge_item);
+            case $CHALL_WEB:
+                array_push($challenge_arr[$CHALL_WEB], $challenge_item);
                 break;
-            case "crypto":
-            array_push($challenge_arr["crypto"], $challenge_item);
+            case $CHALL_CRYPTO:
+                array_push($challenge_arr[$CHALL_CRYPTO], $challenge_item);
+                break;
+            default:
                 break;
         }  
     }

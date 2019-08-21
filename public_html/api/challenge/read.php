@@ -9,7 +9,6 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../config/SPDO.php';
 include_once '../objects/challenge.php';
 include_once '../objects/author.php';
-include_once '../authenticate/authentification.php';
 
 // prepare connexion and instantiate challenge object
 $conn = new SPDO();
