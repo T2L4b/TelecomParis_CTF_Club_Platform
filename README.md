@@ -49,3 +49,8 @@
 * Add PHP filters (inputs are sanitized but aren't filtered).
 * PHPUnit (+ add to travis).
 * Brute-force & DoS API protection (ban after X try).
+
+
+### User
+* Register with email that is already in DB ?
+* Same for pseudo ?

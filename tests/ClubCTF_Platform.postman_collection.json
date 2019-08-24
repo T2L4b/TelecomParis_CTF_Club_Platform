@@ -20,7 +20,7 @@
 									"script": {
 										"id": "657236ca-3961-40c0-9974-8c82549dd839",
 										"exec": [
-											"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+											"pm.test(\"Status code is 201\", function () { pm.response.to.have.status(201); });"
 										],
 										"type": "text/javascript"
 									}
@@ -28,7 +28,14 @@
 							],
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n    \"api_key\" : \"7ce3e5ecc26c1a11a375e9c3f93ddd9b\",\n    \"pseudo\" : \"test_pseudo\",\n    \"hash\" : \"DE4E96582B3A474B66C7021C029597F7\",\n    \"phone\" : \"0612345678\",\n    \"mail\" : \"api@test.com\"\n}"
@@ -69,9 +76,6 @@
 									}
 								}
 							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"auth": {
 									"type": "apikey",
@@ -95,10 +99,6 @@
 								},
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "http://localhost:8082/api/user/read_current.php",
 									"protocol": "http",
@@ -124,6 +124,204 @@
 						}
 					],
 					"_postman_isSubFolder": true
+				},
+				{
+					"name": "User_Update_Success",
+					"item": [
+						{
+							"name": "Users_Update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5be1107c-37db-43dc-ab11-2824a86243fc",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "93ee930d97e38d57a68X41b46ebec6e961a",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "APIKEY",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"pseudo\" : \"R00T\",\r\n    \"api_key\" : \"93ee930d97e38d57a68X41b46ebec6e961a\",\r\n    \"hash\" : \"superhash\",\r\n    \"mail\" : \"api@test.com\",\r\n    \"phone\" : \"0612345678\",\r\n    \"status\" : \"Administrator\",\r\n    \"score\" : 65000\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8082/api/user/update.php",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"user",
+										"update.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Users_Update Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "51e94bcc-4c0c-49bb-bf9f-f2199dac6d27",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () { pm.response.to.have.status(401); });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "wrong_one",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "APIKEY",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"hash\" : \"oijfwe2342o3fim2930\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8082/api/user/update.php",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"user",
+										"update.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Users_Update Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "10c7371a-a5a8-49e1-b79f-d7a76160e9c1",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "93ee930d97e38d57a68X41b46ebec6e961a",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "APIKEY",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"pseudo\" : \"C4LL_M3_R00T_B1TCH\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8082/api/user/update.php",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"user",
+										"update.php"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
 				}
 			]
 		},
@@ -131,12 +329,249 @@
 			"name": "Challenges",
 			"item": [
 				{
-					"name": "Challenges_ReadCurrent",
+					"name": "Challenge_read",
+					"item": [
+						{
+							"name": "Challenges_Read_Success",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c31723ad-2080-4882-a99d-82cb5658222a",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "key",
+											"value": "APIKEY",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "93ee930d97e38d57a68X41b46ebec6e961a",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8082/api/challenge/read_current.php?idChall=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"challenge",
+										"read_current.php"
+									],
+									"query": [
+										{
+											"key": "idChall",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Challenges_Read_404",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c31723ad-2080-4882-a99d-82cb5658222a",
+										"exec": [
+											"pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "93ee930d97e38d57a68X41b46ebec6e961a",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8082/api/challenge/read_current.php?idChall=-1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"challenge",
+										"read_current.php"
+									],
+									"query": [
+										{
+											"key": "idChall",
+											"value": "-1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Challenges_Read_400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c31723ad-2080-4882-a99d-82cb5658222a",
+										"exec": [
+											"pm.test(\"Status code is 400\", function () { pm.response.to.have.status(400); });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "93ee930d97e38d57a68X41b46ebec6e961a",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8082/api/challenge/read_current.php",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"challenge",
+										"read_current.php"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Challenge_readAll",
+					"item": [
+						{
+							"name": "Challenges_ReadAll_Success",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c31723ad-2080-4882-a99d-82cb5658222a",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "93ee930d97e38d57a68X41b46ebec6e961a",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://192.168.99.100:8082/api/challenge/read_all.php",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"99",
+										"100"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"challenge",
+										"read_all.php"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Auth_ValidHeader",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "c31723ad-2080-4882-a99d-82cb5658222a",
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
 								],
@@ -144,18 +579,31 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "93ee930d97e38d57a68X41b46ebec6e961a",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "APIKEY",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
-							"raw": "http://localhost:8082/api/challenge/read_current.php?idChall=1",
+							"raw": "http://localhost:8082/api/auth/authentication.php",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -163,13 +611,117 @@
 							"port": "8082",
 							"path": [
 								"api",
-								"challenge",
-								"read_current.php"
+								"auth",
+								"authentication.php"
 							],
 							"query": [
 								{
-									"key": "idChall",
-									"value": "1"
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth_InvalidHeader",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () { pm.response.to.have.status(401); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "wwerw",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "APIKEY",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/api/auth/authentication.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"auth",
+								"authentication.php"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth_NoHeader",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () { pm.response.to.have.status(400); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/api/auth/authentication.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"auth",
+								"authentication.php"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
 								}
 							]
 						}

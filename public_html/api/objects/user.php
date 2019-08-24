@@ -1,5 +1,6 @@
 <?php
-class User {
+class User
+{
     const APIKEYBIND = ':api_key';
 
     // database connection and table name
@@ -17,12 +18,14 @@ class User {
     public $score = 0;
 
     // constructor with $db as database connection
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->PDO = $db;
     }
 
     // create user
-    function create() {
+    function create()
+    {
         // query to insert record
         $query = "INSERT INTO " . $this->table_name . " (pseudo, api_key, key_validity, hash, mail, phone, status, score) VALUES (:pseudo, " . self::APIKEYBIND . ", :key_validity, :hash, :mail, :phone, :status, :score)";
 
@@ -58,7 +61,8 @@ class User {
     }
 
     // read user
-    function readCurrent() {
+    function readCurrent()
+    {
         // only the required fields should be displayed to the user
         // limit to 1 even if pseudo is a unique identifier
         $query = "SELECT pseudo, api_key, phone, mail, status, score FROM " . $this->table_name . " WHERE api_key LIKE " . self::APIKEYBIND . " LIMIT 1";
@@ -79,7 +83,8 @@ class User {
     }
 
     // update current
-    function update($old_api_key, $fields) {
+    function update($old_api_key, $fields)
+    {
         // update query
         $query = "UPDATE " . $this->table_name . " SET ";
         // if last element do not add comma (query syntax)
@@ -117,30 +122,62 @@ class User {
     }
 
     // check if user api_key is valid
-    function gotValidKey() {
+    function gotValidKey()
+    {
 
         $query = "SELECT key_validity FROM " . $this->table_name . " WHERE api_key LIKE " . self::APIKEYBIND . " LIMIT 1";
-        
+
         // prepare query statement
         $stmt = $this->PDO->prepare($query);
-        
+
         // sanitize
         $this->api_key = htmlspecialchars(strip_tags($this->api_key));
-        
+
         // bind param
         $stmt->bindParam(self::APIKEYBIND, $this->api_key);
-        
+
         // execute query
         $stmt->execute();
 
         $num  = $stmt->rowCount();
-        if ($num < 1) { return false; }
+        if ($num < 1) {
+            return false;
+        }
 
         // fetch result
-        $row = $stmt->fetch(PDO::FETCH_ASSOC); 
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $date = strtotime($row["key_validity"]);
         // check key validity
         return $date - time() > 0;
     }
-    
+
+    // check if given pseudo exist in the database
+    function pseudoExists() {
+        // query to check if pseudo exists
+        $query = "SELECT pseudo, hash FROM " . $this->table_name . " WHERE pseudo = ? LIMIT 0,1";
+        $stmt = $this->PDO->prepare($query);
+
+        // sanitize && bind given pseudo value
+        $this->pseudo = htmlspecialchars(strip_tags($this->pseudo));
+        $stmt->bindParam(1, $this->pseudo);
+
+        $stmt->execute();
+        $num = $stmt->rowCount();
+
+        // if pseudo exists, assign values to object properties for easy access and use for php sessions
+        if ($num > 0) {
+            // get record details / values
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // assign values to object properties
+            $this->pseudo = $row['pseudo'];
+            $this->hash = $row['hash'];
+
+            // pseudo exists in the database
+            return true;
+        }
+
+        // pseudo doesn't exist in the database
+        return false;
+    }
 }
