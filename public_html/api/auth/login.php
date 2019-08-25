@@ -1,6 +1,6 @@
 <?php
 // required headers
-header("Access-Control-Allow-Origin: http://localhost/rest-api-authentication-example/");
+header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
@@ -19,7 +19,6 @@ $data = json_decode(file_get_contents("php://input"));
 
 // check if user match
 $user->pseudo = $data->pseudo;
-$pseudo_exists = $user->pseudoExists();
 
 // generate json web token
 include_once './../config/core.php';
@@ -30,23 +29,25 @@ include_once './../libs/php-jwt/src/JWT.php';
 use \Firebase\JWT\JWT;
 
 // check if email exists and if password is correct
-if($pseudo_exists && password_verify($data->password, $user->hash)){
+if($user->pseudoExists() && password_verify($data->password, $user->hash)){
 
   $token = array(
      "iss" => $iss,
      "aud" => $aud,
      "iat" => $iat,
      "nbf" => $nbf,
+     "exp" => $exp,
      "data" => array(
          "pseudo" => $user->pseudo,
          "hash" => $user->hash
      )
   );
-  // set response code
-  http_response_code(200);
 
   // generate jwt
   $jwt = JWT::encode($token, $key);
+
+  // set response code
+  http_response_code(200);
   echo json_encode(
           array(
               "message" => "Successful login.",

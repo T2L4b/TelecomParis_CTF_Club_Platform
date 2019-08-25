@@ -16,6 +16,8 @@ $aud = "http://tpctf.com";
 // issued at - identifies the time at which the JWT was issued
 $iat = time();
 // not before - identifies the time before which the JWT MUST NOT be accepted for processing
-$nbf = time() + (60 * 60); // an hour
+$nbf = time()-1;
+// expiration time on or after which the JWT MUST NOT be accepted for processing
+$exp = time() + (60 * 60); // an hour after
 
 ?>

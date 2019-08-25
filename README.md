@@ -52,5 +52,7 @@
 
 
 ### User
-* Register with email that is already in DB ?
-* Same for pseudo ?
+* Register with email that is already in DB?
+* Same for pseudo?
+* Update JWT at update user?
+* user- update password = reforge token

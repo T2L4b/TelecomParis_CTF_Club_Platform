@@ -1,24 +1,8 @@
 <?php
-// required headers
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
-header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
 // verify authentication
-require_once "../auth/authentication.php";
+include("../auth/validate_token.php");
 
-// include database and object files
-include_once '../config/SPDO.php';
-include_once '../objects/user.php';
-
-// prepare connexion and instantiate user object
-$conn = new SPDO();
-$user = new User($conn->getConnection());
-
-// set user property values
-$user->api_key = $_SERVER['HTTP_APIKEY'];
+$data = json_decode(file_get_contents("php://input"));
 
 // read current user
 $stmt = $user->readCurrent();
@@ -37,7 +21,6 @@ if ($num > 0) {
     // password hash not provided [ON PURPOSE]
     $user_item = array(
       "pseudo"  => $pseudo,
-      "api_key" => $api_key,
       "phone"   => $phone,
       "mail"    => $mail,
       "status"  => $status,

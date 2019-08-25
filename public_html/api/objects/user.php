@@ -1,7 +1,6 @@
 <?php
 class User
 {
-    const APIKEYBIND = ':api_key';
 
     // database connection and table name
     private $PDO;
@@ -9,8 +8,6 @@ class User
 
     // object properties
     public $pseudo;
-    public $api_key;
-    public $key_validity;
     public $hash;
     public $mail;
     public $phone;
@@ -27,26 +24,21 @@ class User
     function create()
     {
         // query to insert record
-        $query = "INSERT INTO " . $this->table_name . " (pseudo, api_key, key_validity, hash, mail, phone, status, score) VALUES (:pseudo, " . self::APIKEYBIND . ", :key_validity, :hash, :mail, :phone, :status, :score)";
+        $query = "INSERT INTO " . $this->table_name . " (pseudo, hash, mail, phone, status, score) VALUES (:pseudo, :hash, :mail, :phone, :status, :score)";
 
         // prepare query
         $stmt = $this->PDO->prepare($query);
 
         // sanitize
-        $this->pseudo  = htmlspecialchars(strip_tags($this->pseudo));
-        $this->api_key = htmlspecialchars(strip_tags($this->api_key));
-        // an hour after
-        $this->key_validity = date('Y-m-d H:i:s', strtotime('+1 hour', strtotime(date("Y-m-d H:i:s"))));
-        $this->hash  = htmlspecialchars(strip_tags($this->hash));
-        $this->hash  = password_hash($this->hash, PASSWORD_DEFAULT);
-        $this->mail  = htmlspecialchars(strip_tags($this->mail));
-        $this->phone = htmlspecialchars(strip_tags($this->phone));
-        // sanitize status, score, key_validity if not default setting
+        $this->pseudo = htmlspecialchars(strip_tags($this->pseudo));
+        $this->hash   = htmlspecialchars(strip_tags($this->hash));
+        $this->hash   = password_hash($this->hash, PASSWORD_DEFAULT);
+        $this->mail   = htmlspecialchars(strip_tags($this->mail));
+        $this->phone  = htmlspecialchars(strip_tags($this->phone));
+        // sanitize status, score if not default setting
 
         // bind values
         $stmt->bindParam(":pseudo", $this->pseudo);
-        $stmt->bindParam(self::APIKEYBIND, $this->api_key);
-        $stmt->bindParam(":key_validity", $this->key_validity);
         $stmt->bindParam(":hash", $this->hash);
         $stmt->bindParam(":phone", $this->phone);
         $stmt->bindParam(":mail", $this->mail);
@@ -65,16 +57,15 @@ class User
     {
         // only the required fields should be displayed to the user
         // limit to 1 even if pseudo is a unique identifier
-        $query = "SELECT pseudo, api_key, phone, mail, status, score FROM " . $this->table_name . " WHERE api_key LIKE " . self::APIKEYBIND . " LIMIT 1";
+        $query = "SELECT pseudo, hash, phone, mail, status, score FROM " . $this->table_name . " WHERE pseudo = :pseudo AND hash = :hash LIMIT 1";
 
         // prepare query statement
         $stmt = $this->PDO->prepare($query);
 
-        // sanitize
-        $this->api_key = htmlspecialchars(strip_tags($this->api_key));
-
+        // pseudo and hash sanitized at login
         // bind param
-        $stmt->bindParam(self::APIKEYBIND, $this->api_key);
+        $stmt->bindParam(":pseudo", $this->pseudo);
+        $stmt->bindParam(":hash", $this->hash);
 
         // execute query
         $stmt->execute();
@@ -98,7 +89,7 @@ class User
             }
         }
 
-        $query .= " WHERE api_key LIKE :old_api_key LIMIT 1";
+        $query .= " WHERE pseudo = :old_pseudo AND hash = :old_hash LIMIT 1";
 
         // prepare query statement
         $stmt = $this->PDO->prepare($query);
@@ -121,35 +112,6 @@ class User
         return false;
     }
 
-    // check if user api_key is valid
-    function gotValidKey()
-    {
-
-        $query = "SELECT key_validity FROM " . $this->table_name . " WHERE api_key LIKE " . self::APIKEYBIND . " LIMIT 1";
-
-        // prepare query statement
-        $stmt = $this->PDO->prepare($query);
-
-        // sanitize
-        $this->api_key = htmlspecialchars(strip_tags($this->api_key));
-
-        // bind param
-        $stmt->bindParam(self::APIKEYBIND, $this->api_key);
-
-        // execute query
-        $stmt->execute();
-
-        $num  = $stmt->rowCount();
-        if ($num < 1) {
-            return false;
-        }
-
-        // fetch result
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $date = strtotime($row["key_validity"]);
-        // check key validity
-        return $date - time() > 0;
-    }
 
     // check if given pseudo exist in the database
     function pseudoExists() {
@@ -176,8 +138,9 @@ class User
             // pseudo exists in the database
             return true;
         }
-
         // pseudo doesn't exist in the database
         return false;
     }
+
+
 }

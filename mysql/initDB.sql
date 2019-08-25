@@ -3,8 +3,6 @@
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `USERS` (
   `pseudo` VARCHAR(25) NOT NULL,
-  `api_key` VARCHAR(35) NOT NULL,
-  `key_validity` DATETIME NOT NULL,
   `hash` VARCHAR(255) NOT NULL,
   `mail` VARCHAR(50) NOT NULL,
   `phone` VARCHAR(12) NOT NULL,
@@ -12,8 +10,8 @@ CREATE TABLE IF NOT EXISTS `USERS` (
   `score` INT NOT NULL,
   PRIMARY KEY (`pseudo`));
 
-INSERT INTO `USERS` (`pseudo`, `api_key`, `key_validity`, `hash`, `mail`, `phone`, `status`, `score`) VALUES
-('C4LL_M3_R00T_B1TCH', '93ee930d97e38d57a68X41b46ebec6e961a', '2020-01-01 00:00:00', '1a1dc91c907325c69271ddf0c944bc72', 'titouan.veauvy@telecom-paristech.fr', '0123456789', 'Administrator', '9999');
+INSERT INTO `USERS` (`pseudo`, `hash`, `mail`, `phone`, `status`, `score`) VALUES
+('C4LL_M3_R00T_B1TCH', '93ee930d97e38d57a68X41b46ebec6e961a', 'titouan.veauvy@telecom-paristech.fr', '0123456789', 'Administrator', '9999');
 
 -- -----------------------------------------------------
 -- Table `CHALLENGES`

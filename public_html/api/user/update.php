@@ -10,7 +10,7 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 // verify authentication
-require_once "../auth/authentication.php";
+require_once "../auth/validate_token.php";
 
 // include database and object files
 include_once '../config/SPDO.php';
@@ -19,12 +19,6 @@ include_once '../objects/user.php';
 // prepare connexion and instantiate user object
 $conn = new SPDO();
 $user = new User($conn->getConnection());
-
-// @TODO make sure get HTTP Auth APIKEY header not empty
-// should already be checked by auth verification
-
-// set user property values
-$old_api_key = $_SERVER['HTTP_APIKEY'];
 
 // get user properties to be edited
 $data = json_decode(file_get_contents("php://input"));
