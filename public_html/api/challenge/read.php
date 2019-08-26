@@ -39,7 +39,8 @@ if (!(empty($chall))) {
       "type"        => $type,
       "statement"   => $statement,
       "points"      => $points,
-      "difficulty"  => $difficulty
+      "difficulty"  => $difficulty,
+      "url"         => $url
     );
 
     // retrieve author(s)

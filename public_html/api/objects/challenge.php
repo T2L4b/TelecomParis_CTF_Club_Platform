@@ -13,6 +13,7 @@ class Challenge
     public $points;
     public $difficulty;
     public $flag;
+    public $url;
 
     // constructor with $db as database connection
     public function __construct($db)
@@ -24,7 +25,7 @@ class Challenge
     function read() {
         // only the required fields should be displayed to the user
         // limit to 1 even if idChall is a unique identifier
-        $query = "SELECT idChall, title, type, statement, points, difficulty FROM " . $this->table_name . " WHERE idChall LIKE :idChall LIMIT 1";
+        $query = "SELECT idChall, title, type, statement, points, difficulty, url FROM " . $this->table_name . " WHERE idChall LIKE :idChall LIMIT 1";
         // prepare query statement
         $stmt = $this->PDO->prepare($query);
 

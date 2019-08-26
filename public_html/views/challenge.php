@@ -12,8 +12,7 @@ if ( !isset($_GET['chall']) ) {
   exit();
 }
 
-
-$url = 'http://192.168.99.100:8082/api/challenge/read_current.php?idChall='.$_GET['chall'];
+$url = 'http://192.168.99.100:8082/api/challenge/read.php?idChall='.$_GET['chall'];
 
 //create a new cURL resource
 $ch = curl_init($url);
@@ -33,16 +32,23 @@ if ($httpcode === 404) {
 }
 
 if ($httpcode === 400) {
-  // FIXME : Need 400 page
-  header('Location: 404.php');
+  header('Location: 400.php');
   exit();
 }
 
 if ($httpcode === 200) {
-  $title = $result[0]->title;
-  $difficulty = $result[0]->difficulty;
-  $author = $result[0]->author;
-  $points = $result[0]->points;
+  $title = $result->title;
+  $difficulty = $result->difficulty;
+  $author = "";
+  $url = $result->url;
+  foreach ($result->authors as &$auth) {
+    if ($author != "") {
+      $author .= ", ";
+    }
+    $author .= $auth;
+  }
+  $points = $result->points;
+  $statement = $result->statement;
 }
 
 
@@ -235,11 +241,8 @@ curl_close($ch);
                     <h1 class="h4 mb-0 text-gray-800">Enoncé</h1>
                 </div>
                 <div class="card-body">
-                    <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur delectus incidunt fuga a. Esse repudiandae, ex tempora atque facilis qui rem odit molestiae ipsam ipsa. Facilis veritatis architecto numquam delectus?
-                        This card uses Bootstrap's default styling with no utility classes added. Global styles are the only things modifying the look and feel of this default card example.
-                    </p>
-                    <a href="#" class="btn btn-primary btn-icon-split">
+                    <p><?php echo $statement;?></p>
+                    <a href="<?php echo $url;?>" class="btn btn-primary btn-icon-split">
                         <span class="icon text-white-50">
                         <i class="fas fa-arrow-right"></i>
                         </span>
