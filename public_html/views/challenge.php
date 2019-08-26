@@ -40,7 +40,7 @@ if ($httpcode === 200) {
   $title = $result->title;
   $difficulty = $result->difficulty;
   $author = "";
-  $url = $result->url;
+  $challUrl = $result->url;
   foreach ($result->authors as &$auth) {
     if ($author != "") {
       $author .= ", ";
@@ -242,7 +242,7 @@ curl_close($ch);
                 </div>
                 <div class="card-body">
                     <p><?php echo $statement;?></p>
-                    <a href="<?php echo $url;?>" class="btn btn-primary btn-icon-split">
+                    <a href="<?php echo $challUrl;?>" class="btn btn-primary btn-icon-split">
                         <span class="icon text-white-50">
                         <i class="fas fa-arrow-right"></i>
                         </span>
@@ -261,11 +261,12 @@ curl_close($ch);
                     <h1 class="h4 mb-0 text-gray-800">Valider le challenge</h1>
                 </div>
                 <div class="card-body">
+                    <div class="card mb-3 text-gray-100 p-2" style="display:none" id="msgFlag"></div>
                     <p>
                         Saisir le mot de passe
                     </p>
                     <input type="password" class="form-control mb-4" id="flag" placeholder="">
-                    <a href="#" class="btn btn-primary btn-icon-split">
+                    <a href="#" onClick="validateChall()" class="btn btn-primary btn-icon-split">
                         <span class="icon text-white-50">
                         <i class="fas fa-flag"></i>
                         </span>
@@ -313,6 +314,40 @@ curl_close($ch);
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
+
+  <!-- Custom script for challenge validation -->
+  <script>
+    function validateChall() {
+      var flag = document.getElementById("flag").value;
+      var data = JSON.stringify({
+        "jwt": "key",
+        "flag": flag
+      });
+
+      var xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
+
+      xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === 4) {
+          if (this.status === 200) {
+            document.getElementById("msgFlag").classList.add('bg-gradient-success');
+            document.getElementById("msgFlag").innerHTML = "Bien joué vous gagnez <?php echo $points; ?> points";
+            document.getElementById("msgFlag").style.display = "block";
+          } else {
+            document.getElementById("msgFlag").classList.add('bg-gradient-danger');
+            document.getElementById("msgFlag").innerHTML = "Désolé, ce n'est pas le bon flag";
+            document.getElementById("msgFlag").style.display = "block";
+          }
+        }
+      });
+
+      xhr.open("GET", "http://192.168.99.100:8082/api/challenge/validate_chall.php");
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.setRequestHeader("cache-control", "no-cache");
+
+      xhr.send(data);
+    }
+  </script>
 
 </body>
 
