@@ -8,52 +8,9 @@ if (!isset($_SESSION['loggedin'])) {
 
 if ( !isset($_GET['chall']) ) {
 	// Could not get the data that should have been sent.
-  header('Location: 404.php');
-  exit();
-}
-
-$url = 'http://192.168.99.100:8082/api/challenge/read.php?idChall='.$_GET['chall'];
-
-//create a new cURL resource
-$ch = curl_init($url);
-
-//return response instead of outputting
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-//execute the POST request
-$result = curl_exec($ch);
-
-$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-$result = json_decode($result);
-
-if ($httpcode === 404) {
-  header('Location: 404.php');
-  exit();
-}
-
-if ($httpcode === 400) {
   header('Location: 400.php');
   exit();
 }
-
-if ($httpcode === 200) {
-  $title = $result->title;
-  $difficulty = $result->difficulty;
-  $author = "";
-  $challUrl = $result->url;
-  foreach ($result->authors as &$auth) {
-    if ($author != "") {
-      $author .= ", ";
-    }
-    $author .= $auth;
-  }
-  $points = $result->points;
-  $statement = $result->statement;
-}
-
-
-//close cURL resource
-curl_close($ch);
 
 ?>
 
@@ -77,9 +34,16 @@ curl_close($ch);
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+  <!-- Custom js for this page-->
+  <script src="js/challenge.js"></script>
+
 </head>
 
 <body id="page-top">
+
+  <script>
+    loadPage();
+  </script>
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -103,72 +67,22 @@ curl_close($ch);
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-          <!-- Page Heading -->
-          <!--<div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Challenge 01</h1>
-          </div>-->
-
           <div class="row">
 
             <!-- Difficulty Card -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <?php 
-                switch ($difficulty) {
-                  case 'Accessible':
-                    echo '<div class="card border-left-success shadow h-100 py-2">';
-                    break;
-                  case 'Intermédiaire':
-                    echo '<div class="card border-left-warning shadow h-100 py-2">';
-                    break;
-                  case 'Difficile':
-                    echo '<div class="card border-left-danger shadow h-100 py-2">';
-                    break;
-                  default:
-                    echo '<div class="card border-left-gray-900 shadow h-100 py-2">';
-                } 
-                
-              ?>
+              <div id="difficulty_border" class="card shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <?php 
-                      switch ($difficulty) {
-                        case 'Accessible':
-                          echo '<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Difficulté</div>';
-                          break;
-                        case 'Intermédiaire':
-                          echo '<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Difficulté</div>';
-                          break;
-                        case 'Difficile':
-                          echo '<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Difficulté</div>';
-                          break;
-                        default:
-                          echo '<div class="text-xs font-weight-bold text-gray-900 text-uppercase mb-1">Difficulté</div>';
-                      } 
-                      
-                      ?>
+                      <div id="difficulty_text" class="text-xs font-weight-bold text-uppercase mb-1">Difficulté</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php echo $difficulty ?></div>
+                          <div id="difficulty" class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
-                            <?php 
-                            switch ($difficulty) {
-                              case 'Accessible':
-                                echo '<div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>';
-                                break;
-                              case 'Intermédiaire':
-                                echo '<div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>';
-                                break;
-                              case 'Difficile':
-                                echo '<div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>';
-                                break;
-                              default:
-                                echo '<div class="progress-bar bg-gray-900" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>';
-                            } 
-                            
-                            ?>
+                            <div id="difficulty_progress_bar" class="progress-bar" role="progressbar" style="width: 0%"></div>
                           </div>
                         </div>
                       </div>
@@ -204,8 +118,8 @@ curl_close($ch);
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Auteur</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $author; ?></div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Auteur(s)</div>
+                      <div id="authors" class="h5 mb-0 font-weight-bold text-gray-800"></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -222,7 +136,7 @@ curl_close($ch);
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Récompense</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $points;?> points</div>
+                      <div id="points" class="h5 mb-0 font-weight-bold text-gray-800"></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -241,8 +155,8 @@ curl_close($ch);
                     <h1 class="h4 mb-0 text-gray-800">Enoncé</h1>
                 </div>
                 <div class="card-body">
-                    <p><?php echo $statement;?></p>
-                    <a href="<?php echo $challUrl;?>" class="btn btn-primary btn-icon-split">
+                    <p id="statement"></p>
+                    <a id="chall_url" href="" class="btn btn-primary btn-icon-split">
                         <span class="icon text-white-50">
                         <i class="fas fa-arrow-right"></i>
                         </span>
@@ -314,40 +228,6 @@ curl_close($ch);
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
-
-  <!-- Custom script for challenge validation -->
-  <script>
-    function validateChall() {
-      var flag = document.getElementById("flag").value;
-      var data = JSON.stringify({
-        "jwt": "key",
-        "flag": flag
-      });
-
-      var xhr = new XMLHttpRequest();
-      xhr.withCredentials = true;
-
-      xhr.addEventListener("readystatechange", function () {
-        if (this.readyState === 4) {
-          if (this.status === 200) {
-            document.getElementById("msgFlag").classList.add('bg-gradient-success');
-            document.getElementById("msgFlag").innerHTML = "Bien joué vous gagnez <?php echo $points; ?> points";
-            document.getElementById("msgFlag").style.display = "block";
-          } else {
-            document.getElementById("msgFlag").classList.add('bg-gradient-danger');
-            document.getElementById("msgFlag").innerHTML = "Désolé, ce n'est pas le bon flag";
-            document.getElementById("msgFlag").style.display = "block";
-          }
-        }
-      });
-
-      xhr.open("GET", "http://192.168.99.100:8082/api/challenge/validate_chall.php");
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.setRequestHeader("cache-control", "no-cache");
-
-      xhr.send(data);
-    }
-  </script>
 
 </body>
 
