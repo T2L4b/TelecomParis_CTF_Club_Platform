@@ -54,5 +54,9 @@
 ### User
 * Register with email that is already in DB?
 * Same for pseudo?
-* Update JWT at update user?
-* user- update password = reforge token
+* sanitize at update + sanitize in token
+
+### DDoS
+* Infra or/and Code ?
+* https://cloud.google.com/armor/
+* chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://cloud.google.com/files/GCPDDoSprotection-04122016.pdf

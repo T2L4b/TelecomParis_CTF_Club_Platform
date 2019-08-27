@@ -23,10 +23,10 @@ $data = json_decode(file_get_contents("php://input"));
 // make sure data is not empty
 if(! (empty($data->pseudo) && empty($data->hash) && empty($data->phone) && empty($data->mail))) {
     // set user property values
-    $user->pseudo  = $data->pseudo;
-    $user->hash    = $data->hash;
-    $user->mail    = $data->mail;
-    $user->phone   = $data->phone;
+    $user->pseudo = $data->pseudo;
+    $user->hash   = $data->hash;
+    $user->mail   = $data->mail;
+    $user->phone  = $data->phone;
     
     // create the user
     if($user->create()){

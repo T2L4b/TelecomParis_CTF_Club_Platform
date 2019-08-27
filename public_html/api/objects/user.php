@@ -74,13 +74,12 @@ class User
     }
 
     // update current
-    function update($old_api_key, $fields)
+    function update($old_pseudo, $old_hash, $fields)
     {
         // update query
         $query = "UPDATE " . $this->table_name . " SET ";
         // if last element do not add comma (query syntax)
         $lastField = end($fields);
-
         foreach ($fields as $key) {
             if ($key == $lastField) {
                 $query .= $key . " = :" . $key;
@@ -88,15 +87,13 @@ class User
                 $query .= $key . " = :" . $key . ", ";
             }
         }
-
         $query .= " WHERE pseudo = :old_pseudo AND hash = :old_hash LIMIT 1";
 
         // prepare query statement
         $stmt = $this->PDO->prepare($query);
 
-        // sanitize
-        $old_api_key = htmlspecialchars(strip_tags($old_api_key));
-        $stmt->bindParam(':old_api_key', $old_api_key);
+        $stmt->bindParam(':old_pseudo', $old_pseudo);
+        $stmt->bindParam(':old_hash', $old_hash);
 
         // sanitize and bind new values
         foreach ($fields as $key) {

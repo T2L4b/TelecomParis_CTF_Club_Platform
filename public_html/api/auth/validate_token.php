@@ -29,13 +29,6 @@ if ($jwt) {
     // decode jwt
     $decoded = JWT::decode($jwt, $key, array('HS256'));
 
-    /*
-    http_response_code(200);
-    echo json_encode(array(
-      "message" => "Access granted.",
-      "data" => $decoded->data
-    ));*/
-
     // prepare connexion and instantiate user object
     $conn = new SPDO();
     $user = new User($conn->getConnection());

@@ -24,7 +24,7 @@ if ($num > 0) {
       "phone"   => $phone,
       "mail"    => $mail,
       "status"  => $status,
-      "score"  => $score
+      "score"   => $score
     );
 
     array_push($user_arr["records"], $user_item);

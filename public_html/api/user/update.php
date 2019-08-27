@@ -2,41 +2,33 @@
 // API Array key returned message
 define("API_INFO", "message");
 
-// required headers
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
-header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
 // verify authentication
-require_once "../auth/validate_token.php";
-
-// include database and object files
-include_once '../config/SPDO.php';
-include_once '../objects/user.php';
-
-// prepare connexion and instantiate user object
-$conn = new SPDO();
-$user = new User($conn->getConnection());
+include("../auth/validate_token.php");
 
 // get user properties to be edited
 $data = json_decode(file_get_contents("php://input"));
 $fields = array();
+$old_pseudo = $user->pseudo;
+$old_hash = $user->hash;
+
+// required import to decode jwt
+include_once './../config/core.php';
+include_once './../libs/php-jwt/src/BeforeValidException.php';
+include_once './../libs/php-jwt/src/ExpiredException.php';
+include_once './../libs/php-jwt/src/SignatureInvalidException.php';
+include_once './../libs/php-jwt/src/JWT.php';
+
+use \Firebase\JWT\JWT;
 
 // set new properties
-// @TODO replace isset and empty by filters
+// @TODO replace isset and empty by filters + SANITIZE !
 // ugly code just for testing :)
 if (isset($data->pseudo) && (!empty($data->pseudo))) {
     $user->pseudo = $data->pseudo;
     $fields[] = 'pseudo';
 }
-if (isset($data->api_key) && (!empty($data->api_key))) {
-    $user->api_key = $data->api_key;
-    $fields[] = 'api_key';
-}
 if (isset($data->hash) && (!empty($data->hash))) {
-    $user->hash = $data->hash;
+    $user->hash = password_hash($data->hash, PASSWORD_DEFAULT);
     $fields[] = 'hash';
 }
 if (isset($data->mail) && (!empty($data->mail))) {
@@ -65,12 +57,30 @@ if (empty($fields)) {
     echo json_encode(array(API_INFO => "Nothing to update."));
 }
 // if fields empty - do nothing - to do: treat in front-end
-else if ($user->update($old_api_key, $fields)) {
-    // set response code - 200 ok
+else if ($user->update($old_pseudo, $old_hash, $fields)) {
+    // re-generate jwt as user details might have changed
+    $token = array(
+        "iss" => $iss,
+        "aud" => $aud,
+        "iat" => $iat,
+        "nbf" => $nbf,
+        "data" => array(
+            "pseudo" => $user->pseudo,
+            "hash" => $user->hash
+        )
+    );
+    $jwt = JWT::encode($token, $key);
+
+    // set response code
     http_response_code(200);
 
-    // tell the user
-    echo json_encode(array(API_INFO => "User was updated."));
+    // response in json format
+    echo json_encode(
+        array(
+            API_INFO => "User was updated.",
+            "jwt" => $jwt
+        )
+    );
 }
 // if unable to update the user, tell the user
 else {
