@@ -1,3 +1,48 @@
+<?php 
+
+include_once '../api/config/SPDO.php';
+include_once '../api/objects/challenge.php';
+
+// prepare connexion and instantiate challenge object
+$conn = new SPDO();
+$challenge = new challenge($conn->getConnection());
+
+$CHALL_CRYPTO = "crypto";
+$CHALL_WEB = "web";
+
+// read all challenges
+$stmt = $challenge->readAll();
+$num  = $stmt->rowCount();
+
+// challenge array
+$challenge_arr = array();
+$challenge_arr[$CHALL_WEB] = array();
+$challenge_arr[$CHALL_CRYPTO] = array();
+
+// retrieve our table contents: fetch() is faster than fetchAll()
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    extract($row);
+
+    $challenge_item = array(
+    "idChall"     => $idChall,
+    "title"       => $title
+    );
+
+    // put the challenge in the appropriate array
+    switch ($type) {
+        case $CHALL_WEB:
+            array_push($challenge_arr[$CHALL_WEB], $challenge_item);
+            break;
+        case $CHALL_CRYPTO:
+            array_push($challenge_arr[$CHALL_CRYPTO], $challenge_item);
+            break;
+        default:
+            break;
+    }  
+}
+?>
+
+
 <link href="css/nav.css" rel="stylesheet">
 
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -11,7 +56,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item <?php if ($page=="accueil") {echo "active"; }?>">
+    <li class="nav-item">
         <a class="nav-link" href="index.php">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Accueil</span></a>
@@ -26,15 +71,18 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item <?php if ($page=="web") {echo "active"; }?>">
+    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-fw fa-cog"></i>
         <span>Web</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="challenge.php?chall=web_01">WEB 01</a>
-            <a class="collapse-item" href="challenge.php?chall=web_02">WEB 02</a>
+            <?php
+            foreach ($challenge_arr[$CHALL_WEB] as $chall) {
+                echo '<a class="collapse-item" href="challenge.php?chall=' . $chall["idChall"] . '">' . $chall["title"] . '</a>';
+            }
+            ?>
         </div>
         </div>
     </li>
@@ -47,8 +95,11 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="challenge.php?chall=crypto_01">Crypto 01</a>
-            <a class="collapse-item" href="challenge.php?chall=crypto_02">Crypto 02</a>
+            <?php
+            foreach ($challenge_arr[$CHALL_CRYPTO] as $chall) {
+                echo '<a class="collapse-item" href="challenge.php?chall=' . $chall["idChall"] . '">' . $chall["title"] . '</a>';
+            }
+            ?>
         </div>
         </div>
     </li>
