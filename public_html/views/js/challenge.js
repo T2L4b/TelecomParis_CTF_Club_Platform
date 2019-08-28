@@ -1,3 +1,5 @@
+var chall;
+
 function loadPage() {
     var parts = window.location.search.substr(1).split("&");
     var $_GET = {};
@@ -5,6 +7,8 @@ function loadPage() {
         var temp = parts[i].split("=");
         $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
     }
+
+    chall = $_GET['chall'];
 
     var data = JSON.stringify({
         // TODO : Insert real token from cookie
@@ -65,7 +69,7 @@ function loadPage() {
         }
     });
 
-    xhr.open("GET", "http://192.168.99.100:8082/api/challenge/read.php?idChall=" + $_GET['chall']);    
+    xhr.open("GET", "http://192.168.99.100:8082/api/challenge/read.php?idChall=" + chall);    
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("cache-control", "no-cache");
 
@@ -74,9 +78,12 @@ function loadPage() {
 
 function validateChall() {
     var flag = document.getElementById("flag").value;
+    // FIXME : Remove user param once auth is ok with jwt
     var data = JSON.stringify({
         "jwt": "key",
-        "flag": flag
+        "flag":flag,
+        "chall": chall,
+        "user": "C4LL_M3_R00T_B1TCH"
     });
 
     var xhr = new XMLHttpRequest();
@@ -84,20 +91,25 @@ function validateChall() {
 
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === 4) {
-        if (this.status === 200) {
-            document.getElementById("msgFlag").classList.add('bg-gradient-success');
-            document.getElementById("msgFlag").innerHTML = "Bien joué vous gagnez <?php echo $points; ?> points";
-            document.getElementById("msgFlag").style.display = "block";
-        } else {
-            document.getElementById("msgFlag").classList.add('bg-gradient-danger');
-            document.getElementById("msgFlag").innerHTML = "Désolé, ce n'est pas le bon flag";
-            document.getElementById("msgFlag").style.display = "block";
-        }
+            if (this.status === 200) {
+                var response = JSON.parse(this.responseText);                
+                if (response["message"] === "Flag is valid") {
+                    document.getElementById("msgFlag").classList.add('bg-gradient-success');
+                    document.getElementById("msgFlag").innerHTML = "Bien joué l'escroc !";
+                    document.getElementById("msgFlag").style.display = "block";
+                } else {
+                    document.getElementById("msgFlag").classList.add('bg-gradient-danger');
+                    document.getElementById("msgFlag").innerHTML = "Désolé, ce n'est pas le bon flag";
+                    document.getElementById("msgFlag").style.display = "block";
+                }
+            } else {
+                document.getElementById("msgFlag").classList.add('bg-gradient-danger');
+                document.getElementById("msgFlag").innerHTML = "Une erreur est survenue";
+                document.getElementById("msgFlag").style.display = "block";
+            }
         }
     });
-
-    xhr.open("GET", "http://192.168.99.100:8082/api/challenge/validate_chall.php");
-    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.open("POST", "http://192.168.99.100:8082/api/challenge/validate.php");
     xhr.setRequestHeader("cache-control", "no-cache");
 
     xhr.send(data);

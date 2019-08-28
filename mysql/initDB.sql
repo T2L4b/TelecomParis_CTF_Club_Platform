@@ -9,11 +9,10 @@ CREATE TABLE IF NOT EXISTS `USERS` (
   `mail` VARCHAR(50) NOT NULL,
   `phone` VARCHAR(12) NOT NULL,
   `status` ENUM('Member', 'Administrator', 'Author') NOT NULL,
-  `score` INT NOT NULL,
   PRIMARY KEY (`pseudo`));
 
-INSERT INTO `USERS` (`pseudo`, `api_key`, `key_validity`, `hash`, `mail`, `phone`, `status`, `score`) VALUES
-('C4LL_M3_R00T_B1TCH', '93ee930d97e38d57a68X41b46ebec6e961a', '2020-01-01 00:00:00', '1a1dc91c907325c69271ddf0c944bc72', 'titouan.veauvy@telecom-paristech.fr', '0123456789', 'Administrator', '9999');
+INSERT INTO `USERS` (`pseudo`, `api_key`, `key_validity`, `hash`, `mail`, `phone`, `status`) VALUES
+('C4LL_M3_R00T_B1TCH', '93ee930d97e38d57a68X41b46ebec6e961a', '2020-01-01 00:00:00', '1a1dc91c907325c69271ddf0c944bc72', 'titouan.veauvy@telecom-paristech.fr', '0123456789', 'Administrator');
 
 -- -----------------------------------------------------
 -- Table `CHALLENGES`
@@ -52,3 +51,11 @@ INSERT INTO `AUTHORS` (`idChall`,`pseudo`) VALUES
 
 INSERT INTO `AUTHORS` (`idChall`,`pseudo`) VALUES
 ('2', 'hey hey');
+
+-- -----------------------------------------------------
+-- Table `VALIDATIONS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `VALIDATIONS` (
+  `pseudo` VARCHAR(25) NOT NULL,
+  `idChall` int NOT NULL,
+  PRIMARY KEY (`pseudo`, `idChall`));
