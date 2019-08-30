@@ -8,40 +8,45 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include_once '../config/SPDO.php';
 include_once '../objects/challenge.php';
+
+$CHALL_CRYPTO = "crypto";
+$CHALL_WEB = "web";
+
 // prepare connexion and instantiate challenge object
 $conn = new SPDO();
 $challenge = new challenge($conn->getConnection());
 
-// get body posted data
-$chall = $_GET['idChall'];
-// make sure data is not empty
-if (!(empty($chall))) {
-  // set challenge property values
-  $challenge->idChall = $chall;
-  // read current challenge
-  $stmt = $challenge->readCurrent();
-  $num  = $stmt->rowCount();
+// read all challenges
+$stmt = $challenge->readAll();
+$num  = $stmt->rowCount();
 
-  // check if more than 0 record found
-  if ($num > 0) {
+// check if more than 0 record found
+if ($num > 0) {
     // challenge array
     $challenge_arr = array();
+    $challenge_arr[$CHALL_WEB] = array();
+    $challenge_arr[$CHALL_CRYPTO] = array();
 
     // retrieve our table contents: fetch() is faster than fetchAll()
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      extract($row);
+        extract($row);
 
-      $challenge_item = array(
+        $challenge_item = array(
         "idChall"     => $idChall,
-        "title"       => $title,
-        "type"        => $type,
-        "statement"   => $statement,
-        "points"      => $points,
-        "difficulty"  => $difficulty,
-        "author"      => $author
-      );
+        "title"       => $title
+        );
 
-      array_push($challenge_arr, $challenge_item);
+        // put the challenge in the appropriate array
+        switch ($type) {
+            case $CHALL_WEB:
+                array_push($challenge_arr[$CHALL_WEB], $challenge_item);
+                break;
+            case $CHALL_CRYPTO:
+                array_push($challenge_arr[$CHALL_CRYPTO], $challenge_item);
+                break;
+            default:
+                break;
+        }  
     }
 
     // set response code - 200 OK
@@ -50,19 +55,12 @@ if (!(empty($chall))) {
     // show products data in json format
     echo json_encode($challenge_arr);
 
-  } else {
+} else {
     // set response code - 404 Not found
     http_response_code(404);
 
     // tell the challenge no products found
     echo json_encode(array("message" => "No challenge found."));
-  }
-} else { // tell the challenge data is incomplete
-  // set response code - 400 bad request
-  http_response_code(400);
-
-  // tell the challenge
-  echo json_encode(array("message" => "Unable to read challenge, data is incomplete."));
 }
 
 ?>

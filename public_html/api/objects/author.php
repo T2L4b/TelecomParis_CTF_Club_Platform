@@ -1,19 +1,13 @@
 <?php
-class Challenge
+class Author
 {
     // database connection and table name
     private $PDO;
-    private $table_name = "CHALLENGES";
+    private $table_name = "AUTHORS";
 
     // object properties
+    public $pseudo;
     public $idChall;
-    public $title;
-    public $type;
-    public $statement;
-    public $points;
-    public $difficulty;
-    public $flag;
-    public $url;
 
     // constructor with $db as database connection
     public function __construct($db)
@@ -21,11 +15,10 @@ class Challenge
         $this->PDO = $db;
     }
 
-    // read challenge
-    function read() {
-        // only the required fields should be displayed to the user
-        // limit to 1 even if idChall is a unique identifier
-        $query = "SELECT idChall, title, type, statement, points, difficulty, url FROM " . $this->table_name . " WHERE idChall LIKE :idChall LIMIT 1";
+    // read authors
+    function readAuthors() {
+        $query = "SELECT pseudo FROM " . $this->table_name . " WHERE idChall LIKE :idChall";
+
         // prepare query statement
         $stmt = $this->PDO->prepare($query);
 
@@ -41,13 +34,18 @@ class Challenge
         return $stmt;
     }
 
-    // read all challenges
-    function readAll() {
-        // only the required fields should be displayed to the user
-        $query = "SELECT idChall, title, type FROM " . $this->table_name;
+    // read challenges
+    function readChallenges() {
+        $query = "SELECT idChall FROM " . $this->table_name . " WHERE pseudo LIKE :pseudo";
 
         // prepare query statement
         $stmt = $this->PDO->prepare($query);
+
+        // sanitize
+        $this->pseudo = htmlspecialchars(strip_tags($this->pseudo));
+
+        // bind param
+        $stmt->bindParam(":pseudo", $this->pseudo);
 
         // execute query
         $stmt->execute();

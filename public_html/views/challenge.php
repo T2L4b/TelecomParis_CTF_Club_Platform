@@ -8,46 +8,9 @@ if (!isset($_SESSION['loggedin'])) {
 
 if ( !isset($_GET['chall']) ) {
 	// Could not get the data that should have been sent.
-  header('Location: 404.php');
+  header('Location: 400.php');
   exit();
 }
-
-
-$url = 'http://192.168.99.100:8082/api/challenge/read_current.php?idChall='.$_GET['chall'];
-
-//create a new cURL resource
-$ch = curl_init($url);
-
-//return response instead of outputting
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-//execute the POST request
-$result = curl_exec($ch);
-
-$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-$result = json_decode($result);
-
-if ($httpcode === 404) {
-  header('Location: 404.php');
-  exit();
-}
-
-if ($httpcode === 400) {
-  // FIXME : Need 400 page
-  header('Location: 404.php');
-  exit();
-}
-
-if ($httpcode === 200) {
-  $title = $result[0]->title;
-  $difficulty = $result[0]->difficulty;
-  $author = $result[0]->author;
-  $points = $result[0]->points;
-}
-
-
-//close cURL resource
-curl_close($ch);
 
 ?>
 
@@ -71,9 +34,16 @@ curl_close($ch);
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+  <!-- Custom js for this page-->
+  <script src="js/challenge.js"></script>
+
 </head>
 
 <body id="page-top">
+
+  <script>
+    loadPage();
+  </script>
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -97,72 +67,22 @@ curl_close($ch);
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-          <!-- Page Heading -->
-          <!--<div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Challenge 01</h1>
-          </div>-->
-
           <div class="row">
 
             <!-- Difficulty Card -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <?php 
-                switch ($difficulty) {
-                  case 'Accessible':
-                    echo '<div class="card border-left-success shadow h-100 py-2">';
-                    break;
-                  case 'Intermédiaire':
-                    echo '<div class="card border-left-warning shadow h-100 py-2">';
-                    break;
-                  case 'Difficile':
-                    echo '<div class="card border-left-danger shadow h-100 py-2">';
-                    break;
-                  default:
-                    echo '<div class="card border-left-gray-900 shadow h-100 py-2">';
-                } 
-                
-              ?>
+              <div id="difficulty_border" class="card shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <?php 
-                      switch ($difficulty) {
-                        case 'Accessible':
-                          echo '<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Difficulté</div>';
-                          break;
-                        case 'Intermédiaire':
-                          echo '<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Difficulté</div>';
-                          break;
-                        case 'Difficile':
-                          echo '<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Difficulté</div>';
-                          break;
-                        default:
-                          echo '<div class="text-xs font-weight-bold text-gray-900 text-uppercase mb-1">Difficulté</div>';
-                      } 
-                      
-                      ?>
+                      <div id="difficulty_text" class="text-xs font-weight-bold text-uppercase mb-1">Difficulté</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php echo $difficulty ?></div>
+                          <div id="difficulty" class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
-                            <?php 
-                            switch ($difficulty) {
-                              case 'Accessible':
-                                echo '<div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>';
-                                break;
-                              case 'Intermédiaire':
-                                echo '<div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>';
-                                break;
-                              case 'Difficile':
-                                echo '<div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>';
-                                break;
-                              default:
-                                echo '<div class="progress-bar bg-gray-900" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>';
-                            } 
-                            
-                            ?>
+                            <div id="difficulty_progress_bar" class="progress-bar" role="progressbar" style="width: 0%"></div>
                           </div>
                         </div>
                       </div>
@@ -198,8 +118,8 @@ curl_close($ch);
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Auteur</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $author; ?></div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Auteur(s)</div>
+                      <div id="authors" class="h5 mb-0 font-weight-bold text-gray-800"></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -216,7 +136,7 @@ curl_close($ch);
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Récompense</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $points;?> points</div>
+                      <div id="points" class="h5 mb-0 font-weight-bold text-gray-800"></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -235,11 +155,8 @@ curl_close($ch);
                     <h1 class="h4 mb-0 text-gray-800">Enoncé</h1>
                 </div>
                 <div class="card-body">
-                    <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur delectus incidunt fuga a. Esse repudiandae, ex tempora atque facilis qui rem odit molestiae ipsam ipsa. Facilis veritatis architecto numquam delectus?
-                        This card uses Bootstrap's default styling with no utility classes added. Global styles are the only things modifying the look and feel of this default card example.
-                    </p>
-                    <a href="#" class="btn btn-primary btn-icon-split">
+                    <p id="statement"></p>
+                    <a id="chall_url" href="" class="btn btn-primary btn-icon-split">
                         <span class="icon text-white-50">
                         <i class="fas fa-arrow-right"></i>
                         </span>
@@ -258,11 +175,12 @@ curl_close($ch);
                     <h1 class="h4 mb-0 text-gray-800">Valider le challenge</h1>
                 </div>
                 <div class="card-body">
+                    <div class="card mb-3 text-gray-100 p-2" style="display:none" id="msgFlag"></div>
                     <p>
                         Saisir le mot de passe
                     </p>
                     <input type="password" class="form-control mb-4" id="flag" placeholder="">
-                    <a href="#" class="btn btn-primary btn-icon-split">
+                    <a href="#" onClick="validateChall()" class="btn btn-primary btn-icon-split">
                         <span class="icon text-white-50">
                         <i class="fas fa-flag"></i>
                         </span>

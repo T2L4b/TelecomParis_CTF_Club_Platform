@@ -24,8 +24,29 @@ CREATE TABLE IF NOT EXISTS `CHALLENGES` (
   `points` int NOT NULL,
   `difficulty` ENUM('Accessible', 'Intermédiaire', 'Difficile', 'Hardcore') NOT NULL,
   `flag` VARCHAR(255) NOT NULL,
-  `author` VARCHAR(25) NOT NULL,
+  `url` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`idChall`));
 
-INSERT INTO `CHALLENGES` (`type`,`title`,`statement`,`points`,`difficulty`, `flag`, `author`) VALUES
-('web', 'Code source', 'La première chose à faire' , '5', 'Difficile', 'ctvrementfacillol', 'JackPepper');
+INSERT INTO `CHALLENGES` (`type`,`title`,`statement`,`points`,`difficulty`, `flag`, `url`) VALUES
+('web', 'Code source', 'Retrouvez le flag. C\'est facile lol' , '5', 'Accessible', 'ctvrementfacillol', 'https://google.fr');
+INSERT INTO `CHALLENGES` (`type`,`title`,`statement`,`points`,`difficulty`, `flag`, `url`) VALUES
+('web', 'Code source v2', 'Retrouvez le flag. C\'est moins facile lol' , '50', 'Difficile', 'ctpludifficil', 'https://google.fr');
+
+
+
+-- -----------------------------------------------------
+-- Table `AUTHORS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AUTHORS` (
+  `idChall` int NOT NULL,
+  `pseudo` VARCHAR(25) NOT NULL,
+  PRIMARY KEY (`idChall`, `pseudo`));
+
+INSERT INTO `AUTHORS` (`idChall`,`pseudo`) VALUES
+('1', 'JackPepper');
+
+INSERT INTO `AUTHORS` (`idChall`,`pseudo`) VALUES
+('1', 'T2lab');
+
+INSERT INTO `AUTHORS` (`idChall`,`pseudo`) VALUES
+('2', 'hey hey');
