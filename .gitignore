@@ -1,8 +1,6 @@
 # MacOS files
 .DS_Store
 
-# Logs
-logs
-*.log
-/logs
+# personal reminder
+devsecops.md
 
