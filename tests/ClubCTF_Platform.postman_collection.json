@@ -44,7 +44,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://192.168.99.100:8082/api/challenge/read.php?idChall=2",
+							"raw": "http://localhost:8082/api/challenge/read.php?idChall=2",
 							"protocol": "http",
 							"host": [
 								"192",
@@ -103,7 +103,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://192.168.99.100:8082/api/challenge/read.php?idChall=-1",
+							"raw": "http://localhost:8082/api/challenge/read.php?idChall=-1",
 							"protocol": "http",
 							"host": [
 								"192",
@@ -162,7 +162,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://192.168.99.100:8082/api/challenge/read.php",
+							"raw": "http://localhost:8082/api/challenge/read.php",
 							"protocol": "http",
 							"host": [
 								"192",
@@ -233,7 +233,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://192.168.99.100:8082/api/challenge/validate.php",
+							"raw": "http://localhost:8082/api/challenge/validate.php",
 							"protocol": "http",
 							"host": [
 								"192",
@@ -286,7 +286,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://192.168.99.100:8082/api/challenge/read_all.php",
+							"raw": "http://localhost:8082/api/challenge/read_all.php",
 							"protocol": "http",
 							"host": [
 								"192",
