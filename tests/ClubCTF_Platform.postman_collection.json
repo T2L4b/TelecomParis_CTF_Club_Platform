@@ -7,246 +7,324 @@
 	},
 	"item": [
 		{
-			"name": "User",
+			"name": "Scenario_Nominal",
 			"item": [
 				{
-					"name": "User_Create_Success",
-					"item": [
+					"name": "Challenges_Read_Success",
+					"event": [
 						{
-							"name": "Users_Create",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "657236ca-3961-40c0-9974-8c82549dd839",
-										"exec": [
-											"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"api_key\" : \"7ce3e5ecc26c1a11a375e9c3f93ddd9b\",\n    \"pseudo\" : \"test_pseudo\",\n    \"hash\" : \"DE4E96582B3A474B66C7021C029597F7\",\n    \"phone\" : \"0612345678\",\n    \"mail\" : \"api@test.com\"\n}"
-								},
-								"url": {
-									"raw": "http://localhost:8082/api/user/create.php",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8082",
-									"path": [
-										"api",
-										"user",
-										"create.php"
-									]
-								}
-							},
-							"response": []
+							"listen": "test",
+							"script": {
+								"id": "c31723ad-2080-4882-a99d-82cb5658222a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
-					"_postman_isSubFolder": true
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "93ee930d97e38d57a68X41b46ebec6e961a",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8082/api/challenge/read.php?idChall=2",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"challenge",
+								"read.php"
+							],
+							"query": [
+								{
+									"key": "idChall",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
 				},
 				{
-					"name": "User_Read_Success",
-					"item": [
+					"name": "Challenges_Read_404",
+					"event": [
 						{
-							"name": "Users_ReadCurrent",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "657236ca-3961-40c0-9974-8c82549dd839",
-										"exec": [
-											"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "apikey",
-									"apikey": [
-										{
-											"key": "value",
-											"value": "93ee930d97e38d57a68X41b46ebec6e961a",
-											"type": "string"
-										},
-										{
-											"key": "key",
-											"value": "APIKEY",
-											"type": "string"
-										},
-										{
-											"key": "in",
-											"value": "header",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "http://localhost:8082/api/user/read_current.php",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8082",
-									"path": [
-										"api",
-										"user",
-										"read_current.php"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"response": []
+							"listen": "test",
+							"script": {
+								"id": "c31723ad-2080-4882-a99d-82cb5658222a",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
-					"_postman_isSubFolder": true
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "93ee930d97e38d57a68X41b46ebec6e961a",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8082/api/challenge/read.php?idChall=-1",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"challenge",
+								"read.php"
+							],
+							"query": [
+								{
+									"key": "idChall",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Challenges_Read_400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c31723ad-2080-4882-a99d-82cb5658222a",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () { pm.response.to.have.status(400); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "93ee930d97e38d57a68X41b46ebec6e961a",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8082/api/challenge/read.php",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"challenge",
+								"read.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Challenges_Validate_Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c31723ad-2080-4882-a99d-82cb5658222a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "jwt",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "jwt",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "flag",
+									"value": "ctvrementfacillol",
+									"type": "text"
+								},
+								{
+									"key": "chall",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "user",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8082/api/challenge/validate.php",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"challenge",
+								"validate.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Challenges_ReadAll_Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c31723ad-2080-4882-a99d-82cb5658222a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "93ee930d97e38d57a68X41b46ebec6e961a",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://192.168.99.100:8082/api/challenge/read_all.php",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"99",
+								"100"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"challenge",
+								"read_all.php"
+							]
+						}
+					},
+					"response": []
 				}
-			]
-		},
-		{
-			"name": "Challenges",
-			"item": [
+			],
+			"event": [
 				{
-					"name": "Challenge_read",
-					"item": [
-						{
-							"name": "Challenges_Read_Success",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "c31723ad-2080-4882-a99d-82cb5658222a",
-										"exec": [
-											"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "apikey",
-									"apikey": [
-										{
-											"key": "value",
-											"value": "93ee930d97e38d57a68X41b46ebec6e961a",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "http://localhost:8082/api/challenge/read.php?idChall=1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8082",
-									"path": [
-										"api",
-										"challenge",
-										"read.php"
-									],
-									"query": [
-										{
-											"key": "idChall",
-											"value": "1"
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"_postman_isSubFolder": true
+					"listen": "prerequest",
+					"script": {
+						"id": "e4948903-1f17-4728-97f4-050afe30b21d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				},
 				{
-					"name": "Challenge_readAll",
-					"item": [
-						{
-							"name": "Challenges_ReadAll_Success",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "c31723ad-2080-4882-a99d-82cb5658222a",
-										"exec": [
-											"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "apikey",
-									"apikey": [
-										{
-											"key": "value",
-											"value": "93ee930d97e38d57a68X41b46ebec6e961a",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "http://localhost:8082/api/challenge/read_all.php",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8082",
-									"path": [
-										"api",
-										"challenge",
-										"read_all.php"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"_postman_isSubFolder": true
+					"listen": "test",
+					"script": {
+						"id": "3a49957e-981d-4b74-8ca4-5675dd29d86e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		}

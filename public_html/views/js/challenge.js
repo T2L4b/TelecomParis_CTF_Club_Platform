@@ -79,12 +79,11 @@ function loadPage() {
 function validateChall() {
     var flag = document.getElementById("flag").value;
     // FIXME : Remove user param once auth is ok with jwt
-    var data = JSON.stringify({
-        "jwt": "key",
-        "flag": flag,
-        "chall": chall,
-        "user": "C4LL_M3_R00T_B1TCH"
-    });
+    var data = new FormData();
+    data.append("jwt", "key");
+    data.append("flag", flag);
+    data.append("chall", chall);
+    data.append("user", "C4LL_M3_R00T_B1TCH");
 
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
