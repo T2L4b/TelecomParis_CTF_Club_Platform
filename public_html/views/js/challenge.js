@@ -94,10 +94,12 @@ function validateChall() {
             if (this.status === 200) {
                 var response = JSON.parse(this.responseText);                
                 if (response["message"] === "Flag is valid") {
+                    document.getElementById("msgFlag").classList.remove('bg-gradient-danger');
                     document.getElementById("msgFlag").classList.add('bg-gradient-success');
                     document.getElementById("msgFlag").innerHTML = "Bien joué l'escroc !";
                     document.getElementById("msgFlag").style.display = "block";
                 } else {
+                    document.getElementById("msgFlag").classList.remove('bg-gradient-success');
                     document.getElementById("msgFlag").classList.add('bg-gradient-danger');
                     document.getElementById("msgFlag").innerHTML = "Désolé, ce n'est pas le bon flag";
                     document.getElementById("msgFlag").style.display = "block";
