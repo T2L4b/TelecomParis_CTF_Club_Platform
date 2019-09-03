@@ -41,14 +41,14 @@ if (!(empty($idChall) || empty($flag))) {
     // set response code - 200 OK
     http_response_code(200);
 
-    // show products data in json format
+    // tell the flag is OK
     echo json_encode(array("message" => "Flag is valid"));
 
   } else {
-    // set response code - 404 Not found
+    // set response code - 200 OK
     http_response_code(200);
 
-    // tell the challenge no products found
+    // tell the flag is wrong
     echo json_encode(array("message" => "Flag is not valid"));
   }
 } else { // tell the challenge data is incomplete
@@ -56,7 +56,7 @@ if (!(empty($idChall) || empty($flag))) {
   http_response_code(400);
 
   // tell the challenge
-  echo json_encode(array("message" => "Unable to read challenge, data is incomplete."));
+  echo json_encode(array("message" => "Unable to process flag, data is incomplete."));
 }
 
 ?>

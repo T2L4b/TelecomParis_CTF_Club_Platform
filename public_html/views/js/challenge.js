@@ -81,7 +81,7 @@ function validateChall() {
     // FIXME : Remove user param once auth is ok with jwt
     var data = JSON.stringify({
         "jwt": "key",
-        "flag":flag,
+        "flag": flag,
         "chall": chall,
         "user": "C4LL_M3_R00T_B1TCH"
     });

@@ -18,9 +18,7 @@ class Validation
     // add a validation
     function addValidation() {
         $query = "INSERT INTO " . $this->table_name . " (pseudo, idChall)
-        VALUES (:pseudo, :idChall)";/*
-        WHERE NOT EXISTS ( SELECT * FROM " . $this->table_name . 
-                        " WHERE idChall LIKE :idChall AND pseudo LIKE :pseudo)";*/
+        VALUES (:pseudo, :idChall)";
 
         // prepare query statement
         $stmt = $this->PDO->prepare($query);

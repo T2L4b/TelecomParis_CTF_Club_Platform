@@ -58,7 +58,7 @@ if (!(empty($chall))) {
     echo json_encode($challenge_item);
 
   } else {
-    // set response code - 404 Not found
+    // set response code - 404 Not found 
     http_response_code(404);
 
     // tell the challenge no products found
