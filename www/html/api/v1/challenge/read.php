@@ -1,4 +1,5 @@
 <?php
+define("ID_CHALL", "idChall");
 // verify authentication
 include_once("../auth/validate_token.php");
 
@@ -12,9 +13,9 @@ $challenge = new challenge($conn->getConnection());
 $author = new author($conn->getConnection());
 
 // make sure data is not empty
-if (!empty($chall) || !empty($_GET['idChall']) ) {
+if (!empty($chall) || !empty($_GET[ID_CHALL]) ) {
   // get data from url
-  $chall =  $_GET['idChall'];
+  $chall =  $_GET[ID_CHALL];
   // set challenge property values
   $challenge->idChall = $chall;
   // read current challenge
@@ -30,7 +31,7 @@ if (!empty($chall) || !empty($_GET['idChall']) ) {
 
     // retrive challenge infos
     $challenge_item = array(
-      "idChall"     => $idChall,
+      ID_CHALL      => $idChall,
       "title"       => $title,
       "type"        => $type,
       "statement"   => $statement,

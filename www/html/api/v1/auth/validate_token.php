@@ -6,6 +6,8 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
+define("AUTH_HEADER", "Authorization");
+
 // include database and object files
 include_once '../../../../config/SPDO.php';
 include_once '../objects/user.php';
@@ -19,8 +21,8 @@ use \Firebase\JWT\JWT;
  * */
 function getAuthorizationHeader(){
   $headers = null;
-  if (isset($_SERVER['Authorization'])) {
-      $headers = trim($_SERVER["Authorization"]);
+  if (isset($_SERVER[AUTH_HEADER])) {
+      $headers = trim($_SERVER[AUTH_HEADER]);
   }
   else if (isset($_SERVER['HTTP_AUTHORIZATION'])) { //Nginx or fast CGI
       $headers = trim($_SERVER["HTTP_AUTHORIZATION"]);
@@ -28,8 +30,8 @@ function getAuthorizationHeader(){
       $requestHeaders = apache_request_headers();
       // Server-side fix for bug in old Android versions (a nice side-effect of this fix means we don't care about capitalization for Authorization)
       $requestHeaders = array_combine(array_map('ucwords', array_keys($requestHeaders)), array_values($requestHeaders));
-      if (isset($requestHeaders['Authorization'])) {
-          $headers = trim($requestHeaders['Authorization']);
+      if (isset($requestHeaders[AUTH_HEADER])) {
+          $headers = trim($requestHeaders[AUTH_HEADER]);
       }
   }
   return $headers;
@@ -40,10 +42,8 @@ function getAuthorizationHeader(){
 function getBearerToken() {
 $headers = getAuthorizationHeader();
 // HEADER: Get the access token from the header
-if (!empty($headers)) {
-  if (preg_match('/Bearer\s(\S+)/', $headers, $matches)) {
-      return $matches[1];
-  }
+if (!empty($headers) && preg_match('/Bearer\s(\S+)/', $headers, $matches)) {
+  return $matches[1];
 }
 return null;
 }
