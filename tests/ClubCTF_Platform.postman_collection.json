@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "7ecc2e8c-300c-4ae8-a4e5-05b0829a4add",
-		"name": "ClubCTF_Platform",
+		"_postman_id": "947e812a-a266-40e1-8738-445537c7f4bf",
+		"name": "ClubCTF_Platform LOCAL",
 		"description": "Postman test collection for the TP_CTF_Club of the ClubCTF_Platform.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -38,7 +38,7 @@
 							"raw": "{\n    \"pseudo\" : \"pseudo\",\n    \"hash\" : \"test\",\n    \"mail\" : \"api@test.com\",\n    \"phone\" : \"0612345678\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/user/create.php",
+							"raw": "http://localhost:8082/api/v1/user/create.php",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -46,6 +46,7 @@
 							"port": "8082",
 							"path": [
 								"api",
+								"v1",
 								"user",
 								"create.php"
 							]
@@ -86,7 +87,7 @@
 							"raw": "{\n    \"pseudo\": \"pseudo\",\n    \"password\": \"test\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/auth/login.php",
+							"raw": "http://localhost:8082/api/v1/auth/login.php",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -94,6 +95,7 @@
 							"port": "8082",
 							"path": [
 								"api",
+								"v1",
 								"auth",
 								"login.php"
 							]
@@ -119,6 +121,16 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtoken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -130,10 +142,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"jwt\": \"{{jwtoken}}\"\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/user/read_current.php",
+							"raw": "http://localhost:8082/api/v1/user/read_current.php",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -141,6 +153,7 @@
 							"port": "8082",
 							"path": [
 								"api",
+								"v1",
 								"user",
 								"read_current.php"
 							],
@@ -174,21 +187,11 @@
 					],
 					"request": {
 						"auth": {
-							"type": "apikey",
-							"apikey": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "value",
-									"value": "93ee930d97e38d57a68X41b46ebec6e961a",
-									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "APIKEY",
-									"type": "string"
-								},
-								{
-									"key": "in",
-									"value": "header",
+									"key": "token",
+									"value": "{{jwtoken}}",
 									"type": "string"
 								}
 							]
@@ -204,10 +207,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"jwt\": \"{{jwtoken}}\",\r\n    \"pseudo\" : \"R00T\",\r\n    \"hash\" : \"mysuperNEWPASS\",\r\n    \"mail\" : \"api2@test.com\",\r\n    \"phone\" : \"0612345679\",\r\n    \"status\" : \"Administrator\",\r\n    \"score\" : 2000\r\n}"
+							"raw": "{\r\n    \"pseudo\" : \"R00T\",\r\n    \"hash\" : \"mysuperNEWPASS\",\r\n    \"mail\" : \"api2@test.com\",\r\n    \"phone\" : \"0612345679\",\r\n    \"status\" : \"Administrator\",\r\n    \"score\" : 2000\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/user/update.php",
+							"raw": "http://localhost:8082/api/v1/user/update.php",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -215,6 +218,7 @@
 							"port": "8082",
 							"path": [
 								"api",
+								"v1",
 								"user",
 								"update.php"
 							]
@@ -240,6 +244,16 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtoken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -251,10 +265,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"jwt\": \"{{jwtoken}}\"\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/user/read_current.php",
+							"raw": "http://localhost:8082/api/v1/user/read_current.php",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -262,6 +276,7 @@
 							"port": "8082",
 							"path": [
 								"api",
+								"v1",
 								"user",
 								"read_current.php"
 							],
@@ -277,7 +292,54 @@
 					"response": []
 				},
 				{
-					"name": "Challenges_Read_Success",
+					"name": "Challenges_Read_Failure",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c31723ad-2080-4882-a99d-82cb5658222a",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () { pm.response.to.have.status(401); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/challenge/read.php?idChall=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"challenge",
+								"read.php"
+							],
+							"query": [
+								{
+									"key": "idChall",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Challenges_Read_Success Copy",
 					"event": [
 						{
 							"listen": "test",
@@ -295,11 +357,11 @@
 					},
 					"request": {
 						"auth": {
-							"type": "apikey",
-							"apikey": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "value",
-									"value": "93ee930d97e38d57a68X41b46ebec6e961a",
+									"key": "token",
+									"value": "{{jwtoken}}",
 									"type": "string"
 								}
 							]
@@ -311,17 +373,15 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://192.168.99.100:8082/api/challenge/read.php?idChall=2",
+							"raw": "http://localhost:8082/api/v1/challenge/read.php?idChall=2",
 							"protocol": "http",
 							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
+								"localhost"
 							],
 							"port": "8082",
 							"path": [
 								"api",
+								"v1",
 								"challenge",
 								"read.php"
 							],
@@ -354,11 +414,11 @@
 					},
 					"request": {
 						"auth": {
-							"type": "apikey",
-							"apikey": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "value",
-									"value": "93ee930d97e38d57a68X41b46ebec6e961a",
+									"key": "token",
+									"value": "{{jwtoken}}",
 									"type": "string"
 								}
 							]
@@ -370,17 +430,15 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://192.168.99.100:8082/api/challenge/read.php?idChall=-1",
+							"raw": "http://localhost:8082/api/v1/challenge/read.php?idChall=-1",
 							"protocol": "http",
 							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
+								"localhost"
 							],
 							"port": "8082",
 							"path": [
 								"api",
+								"v1",
 								"challenge",
 								"read.php"
 							],
@@ -413,11 +471,11 @@
 					},
 					"request": {
 						"auth": {
-							"type": "apikey",
-							"apikey": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "value",
-									"value": "93ee930d97e38d57a68X41b46ebec6e961a",
+									"key": "token",
+									"value": "{{jwtoken}}",
 									"type": "string"
 								}
 							]
@@ -429,88 +487,17 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://192.168.99.100:8082/api/challenge/read.php",
+							"raw": "http://localhost:8082/api/v1/challenge/read.php",
 							"protocol": "http",
 							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
+								"localhost"
 							],
 							"port": "8082",
 							"path": [
 								"api",
+								"v1",
 								"challenge",
 								"read.php"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Challenges_Validate_Success",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "c31723ad-2080-4882-a99d-82cb5658222a",
-								"exec": [
-									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "apikey",
-							"apikey": [
-								{
-									"key": "key",
-									"value": "key",
-									"type": "string"
-								},
-								{
-									"key": "value",
-									"value": "93ee930d97e38d57a68X41b46ebec6e961a",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://192.168.99.100:8082/api/challenge/validate.php?flag=ctvrementfacillol&chall=1&user=1",
-							"protocol": "http",
-							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
-							],
-							"port": "8082",
-							"path": [
-								"api",
-								"challenge",
-								"validate.php"
-							],
-							"query": [
-								{
-									"key": "flag",
-									"value": "ctvrementfacillol"
-								},
-								{
-									"key": "chall",
-									"value": "1"
-								},
-								{
-									"key": "user",
-									"value": "1"
-								}
 							]
 						}
 					},
@@ -535,11 +522,11 @@
 					},
 					"request": {
 						"auth": {
-							"type": "apikey",
-							"apikey": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "value",
-									"value": "93ee930d97e38d57a68X41b46ebec6e961a",
+									"key": "token",
+									"value": "{{jwtoken}}",
 									"type": "string"
 								}
 							]
@@ -551,17 +538,15 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://192.168.99.100:8082/api/challenge/read_all.php",
+							"raw": "http://localhost:8082/api/v1/challenge/read_all.php",
 							"protocol": "http",
 							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
+								"localhost"
 							],
 							"port": "8082",
 							"path": [
 								"api",
+								"v1",
 								"challenge",
 								"read_all.php"
 							]
@@ -591,7 +576,9 @@
 						]
 					}
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }

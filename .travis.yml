@@ -1,6 +1,6 @@
 sudo: required
 dist: trusty
-language: node_js
+language: php
 node_js:
   - "12.9.0"
 
@@ -20,6 +20,7 @@ env:
   DOCKER_COMPOSE_VERSION: 1.24.1
 
 before_install:
+  - cd www/ && composer install --no-dev && cd ../
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
