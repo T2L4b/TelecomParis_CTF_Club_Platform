@@ -55,4 +55,25 @@ class Challenge
         return $stmt;
     }
 
+    // validate flag
+    function validate() {
+        $query = "SELECT idChall type FROM " . $this->table_name . " WHERE idChall LIKE :idChall AND flag LIKE :flag";
+
+        // prepare query statement
+        $stmt = $this->PDO->prepare($query);
+
+        // sanitize
+        $this->idChall = htmlspecialchars(strip_tags($this->idChall));
+        $this->flag = htmlspecialchars(strip_tags($this->flag));
+
+        // bind param
+        $stmt->bindParam(":idChall", $this->idChall);
+        $stmt->bindParam(":flag", $this->flag);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt->rowCount() > 0;
+    }
+
 }

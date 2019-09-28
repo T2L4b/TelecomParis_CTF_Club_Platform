@@ -7,7 +7,6 @@ CREATE TABLE IF NOT EXISTS `USERS` (
   `mail` VARCHAR(50) NOT NULL,
   `phone` VARCHAR(12) NOT NULL,
   `status` ENUM('Member', 'Administrator', 'Author') NOT NULL,
-  `score` INT NOT NULL,
   PRIMARY KEY (`pseudo`));
 
 INSERT INTO `USERS` (`pseudo`, `hash`, `mail`, `phone`, `status`, `score`) VALUES
@@ -50,3 +49,11 @@ INSERT INTO `AUTHORS` (`idChall`,`pseudo`) VALUES
 
 INSERT INTO `AUTHORS` (`idChall`,`pseudo`) VALUES
 ('2', 'hey hey');
+
+-- -----------------------------------------------------
+-- Table `VALIDATIONS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `VALIDATIONS` (
+  `pseudo` VARCHAR(25) NOT NULL,
+  `idChall` int NOT NULL,
+  PRIMARY KEY (`pseudo`, `idChall`));

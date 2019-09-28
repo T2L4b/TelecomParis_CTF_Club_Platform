@@ -23,7 +23,7 @@ cd www/ && composer install --no-dev
 
 # Contributors
 
-## Lead Developer: Back
+## Lead Developer
 
 [@T2L4b](https://github.com/T2L4b)  
 <img src="https://avatars2.githubusercontent.com/u/50122584?s=460&v=4" alt="T2L4b avatar" width="75" />  
