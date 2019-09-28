@@ -34,7 +34,7 @@ cd www/ && composer install --no-dev
 <img src="https://avatars2.githubusercontent.com/u/24301234?s=460&v=4" alt="JackPepper avatar" width="75" />  
 
 ## Front Developers
-(in development - not the one currently used)  
+(in development - not the one currently in the repo)  
 
 [@noedelorme](https://github.com/noedelorme)  
 <img src="https://avatars3.githubusercontent.com/u/38424932?s=460&v=4" alt="noedelorme avatar" width="75" />  

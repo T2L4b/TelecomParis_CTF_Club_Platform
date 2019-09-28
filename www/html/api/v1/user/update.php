@@ -17,7 +17,6 @@ require_once '../../../../vendor/autoload.php';
 use \Firebase\JWT\JWT;
 
 // set new properties
-// @TODO replace isset and empty by filters + SANITIZE !
 // ugly code just for testing :)
 if (isset($data->pseudo) && (!empty($data->pseudo))) {
     $user->pseudo = $data->pseudo;
