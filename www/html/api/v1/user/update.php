@@ -12,12 +12,8 @@ $old_pseudo = $user->pseudo;
 $old_hash = $user->hash;
 
 // required import to decode jwt
-include_once './../config/core.php';
-include_once './../libs/php-jwt/src/BeforeValidException.php';
-include_once './../libs/php-jwt/src/ExpiredException.php';
-include_once './../libs/php-jwt/src/SignatureInvalidException.php';
-include_once './../libs/php-jwt/src/JWT.php';
-
+require_once '../../../../config/core.php';
+require_once '../../../../vendor/autoload.php';
 use \Firebase\JWT\JWT;
 
 // set new properties

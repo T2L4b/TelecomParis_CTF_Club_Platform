@@ -7,7 +7,9 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
  
 // include database and object files
-include_once '../config/SPDO.php';
+require_once '../../../../config/core.php';
+require_once '../../../../vendor/autoload.php';
+include_once '../../../../config/SPDO.php';
 include_once '../objects/user.php';
 
 // prepare connexion and instantiate user object
@@ -21,11 +23,6 @@ $data = json_decode(file_get_contents("php://input"));
 $user->pseudo = $data->pseudo;
 
 // generate json web token
-include_once './../config/core.php';
-include_once './../libs/php-jwt/src/BeforeValidException.php';
-include_once './../libs/php-jwt/src/ExpiredException.php';
-include_once './../libs/php-jwt/src/SignatureInvalidException.php';
-include_once './../libs/php-jwt/src/JWT.php';
 use \Firebase\JWT\JWT;
 
 // check if email exists and if password is correct
@@ -60,7 +57,7 @@ if($user->pseudoExists() && password_verify($data->password, $user->hash)){
   http_response_code(401);
 
   // tell the user login failed
-  echo json_encode(array("message" => "Login failed."));
+echo json_encode(array("message" => "Login failed."));
 }
 
 ?>

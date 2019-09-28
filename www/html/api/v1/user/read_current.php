@@ -1,6 +1,6 @@
 <?php
 // verify authentication
-include("../auth/validate_token.php");
+include_once("../auth/validate_token.php");
 
 $data = json_decode(file_get_contents("php://input"));
 

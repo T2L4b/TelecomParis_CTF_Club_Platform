@@ -1,6 +1,6 @@
-# MacOS files
 .DS_Store
-
-# personal reminder
-devsecops.md
-
+Thumbs.db
+npm-debug.log
+/bower_components
+/node_modules
+**/vendor

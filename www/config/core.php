@@ -1,6 +1,5 @@
 <?php
 // show error reporting
-// TODO do not display error reporting for prod
 error_reporting(E_ALL);
  
 // set your default time-zone

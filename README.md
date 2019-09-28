@@ -69,3 +69,13 @@
 * Infra or/and Code ?
 * https://cloud.google.com/armor/
 * chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://cloud.google.com/files/GCPDDoSprotection-04122016.pdf
+
+
+https://stackoverflow.com/questions/9720587/create-db-and-user-mysql-and-set-privileges-php
+
+
+### bash script to compare docker files - mail if new/removed file + mail filename & content
+
+```
+composer install --no-dev
+```

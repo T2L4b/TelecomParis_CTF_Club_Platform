@@ -10,7 +10,7 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 // include database and object files
-include_once '../config/SPDO.php';
+include_once '../../../../config/SPDO.php';
 include_once '../objects/user.php';
 
 // prepare connexion and instantiate user object
