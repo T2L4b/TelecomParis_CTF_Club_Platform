@@ -43,19 +43,13 @@ if(! (empty($data->pseudo) && empty($data->hash) && empty($data->phone) && empty
 
     // if unable to create the user, tell the user
     } else{
-        // set response code - 503 service unavailable
+        
         http_response_code(503);
-        // tell the user
-        //echo json_encode(array(API_MESSAGE => "Unable to create user."));
         echo API_ERROR;
 
         $logger->error("Unable to create user 503");
     }
-} else{ // tell the user data is incomplete
-    // set response code - 400 bad request
-    //http_response_code(400);
-    // tell the user
-    //echo json_encode(array(API_MESSAGE => "Unable to create user, data is incomplete."));
+} else {
 
     http_response_code(503);
     echo API_ERROR;

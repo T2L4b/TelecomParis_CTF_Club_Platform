@@ -71,8 +71,6 @@ if ($jwt) {
   } catch (Exception $e) {
 
     // set response code
-    //http_response_code(401);
-    // tell the user access denied & show error message
     http_response_code(503);
     echo API_ERROR;
 
@@ -84,9 +82,6 @@ if ($jwt) {
   // show error message if jwt is empty
 } else {
 
-  // set response code
-  //http_response_code(401);
-  // tell the user access denied
   http_response_code(503);
   echo API_ERROR;
   $logger->error("token empty 503");

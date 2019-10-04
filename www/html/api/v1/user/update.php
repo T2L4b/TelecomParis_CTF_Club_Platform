@@ -80,9 +80,7 @@ else if ($user->update($old_pseudo, $old_hash, $fields)) {
 else {
     // set response code - 503 service unavailable
     http_response_code(503);
-    // tell the user
-    //echo json_encode(array(API_MESSAGE => "Unable to update user."));
-
     echo API_ERROR;
+    
     $logger->error("Unable to update user 503");
 }

@@ -56,13 +56,10 @@ if($user->pseudoExists() && password_verify($data->password, $user->hash)){
   $logger->info("user logged in 200");
 
 } else { // login failed
-  // set response code
-  //http_response_code(401);
-  // tell the user login failed
-  //echo json_encode(array("message" => "Login failed."));
 
   http_response_code(503);
   echo API_ERROR;
+  
   $logger->error("user log in failed 401");
 }
 

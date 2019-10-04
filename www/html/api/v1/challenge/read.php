@@ -57,21 +57,14 @@ if (!empty($chall) || !empty($_GET[ID_CHALL]) ) {
     $logger->info("Challenge read 200");
 
   } else {
-    // set response code - 404 Not found 
-    //http_response_code(404);
-    // tell the challenge no products found
-    //echo json_encode(array(API_MESSAGE => "No challenge found."));
 
     http_response_code(503);
     echo API_ERROR;
 
     $logger->error("Challenge read not found 404");
   }
-} else { // tell the challenge data is incomplete
-  // set response code - 400 bad request
-  //http_response_code(400);
-  // tell the challenge
-  //echo json_encode(array(API_MESSAGE => "Unable to read challenge, data is incomplete."));
+  
+} else {
 
   http_response_code(503);
   echo API_ERROR;

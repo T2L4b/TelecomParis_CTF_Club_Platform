@@ -42,11 +42,7 @@ if ($num > 0) {
   $logger->info("read_current user 200");
 
 } else {
-  // set response code - 404 Not found
-  //http_response_code(404);
-  // tell the user no products found
-  //echo json_encode(array(API_MESSAGE => "No user found."));
-
+  
   http_response_code(503);
   echo API_ERROR;
 
