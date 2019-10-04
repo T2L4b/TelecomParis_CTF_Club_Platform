@@ -15,6 +15,8 @@ include_once '../objects/user.php';
 require_once '../../../../config/core.php';
 require_once '../../../../vendor/autoload.php';
 use \Firebase\JWT\JWT;
+// init logger
+$logger = new Katzgrau\KLogger\Logger(LOG_PATH);
 
 /** 
  * Get header Authorization
@@ -69,13 +71,12 @@ if ($jwt) {
   } catch (Exception $e) {
 
     // set response code
-    http_response_code(401);
-
+    //http_response_code(401);
     // tell the user access denied & show error message
-    echo json_encode(array(
-      "message" => "Access denied."
-      ,"error" => $e->getMessage()
-    ));
+    http_response_code(503);
+    echo API_ERROR;
+
+    $logger->error("token decode error: " .  $e->getMessage());
 
     exit();
   }
@@ -84,11 +85,11 @@ if ($jwt) {
 } else {
 
   // set response code
-  http_response_code(401);
-
+  //http_response_code(401);
   // tell the user access denied
-  echo json_encode(array("message" => "Access denied."
-));
+  http_response_code(503);
+  echo API_ERROR;
+  $logger->error("token empty 503");
 
   exit();
 }

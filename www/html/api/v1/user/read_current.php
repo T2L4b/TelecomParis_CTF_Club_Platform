@@ -2,6 +2,9 @@
 // verify authentication
 include_once("../auth/validate_token.php");
 
+// init logger
+$logger = new Katzgrau\KLogger\Logger(LOG_PATH);
+
 $data = json_decode(file_get_contents("php://input"));
 
 // read current user
@@ -35,10 +38,17 @@ if ($num > 0) {
 
   // show products data in json format
   echo json_encode($user_arr);
+
+  $logger->info("read_current user 200");
+
 } else {
   // set response code - 404 Not found
-  http_response_code(404);
-
+  //http_response_code(404);
   // tell the user no products found
-  echo json_encode(array("message" => "No user found."));
+  //echo json_encode(array(API_MESSAGE => "No user found."));
+
+  http_response_code(503);
+  echo API_ERROR;
+
+  $logger->error("User read_current not found 404");
 }

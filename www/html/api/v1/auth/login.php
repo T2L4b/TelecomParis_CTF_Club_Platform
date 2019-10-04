@@ -15,6 +15,8 @@ include_once '../objects/user.php';
 // prepare connexion and instantiate user object
 $conn = new SPDO();
 $user = new User($conn->getConnection());
+// init logger
+$logger = new Katzgrau\KLogger\Logger(LOG_PATH);
 
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
@@ -51,13 +53,17 @@ if($user->pseudoExists() && password_verify($data->password, $user->hash)){
               "jwt" => $jwt
           )
       );
+  $logger->info("user logged in 200");
 
 } else { // login failed
   // set response code
-  http_response_code(401);
-
+  //http_response_code(401);
   // tell the user login failed
-echo json_encode(array("message" => "Login failed."));
+  //echo json_encode(array("message" => "Login failed."));
+
+  http_response_code(503);
+  echo API_ERROR;
+  $logger->error("user log in failed 401");
 }
 
 ?>

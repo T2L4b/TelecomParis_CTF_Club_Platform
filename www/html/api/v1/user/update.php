@@ -1,9 +1,7 @@
 <?php
-// API Array key returned message
-define("API_INFO", "message");
-
 // verify authentication
-include("../auth/validate_token.php");
+include_once("../auth/validate_token.php");
+use \Firebase\JWT\JWT;
 
 // get user properties to be edited
 $data = json_decode(file_get_contents("php://input"));
@@ -11,10 +9,8 @@ $fields = array();
 $old_pseudo = $user->pseudo;
 $old_hash = $user->hash;
 
-// required import to decode jwt
-require_once '../../../../config/core.php';
-require_once '../../../../vendor/autoload.php';
-use \Firebase\JWT\JWT;
+// init logger
+$logger = new Katzgrau\KLogger\Logger(LOG_PATH);
 
 // set new properties
 // ugly code just for testing :)
@@ -49,7 +45,9 @@ if (empty($fields)) {
     http_response_code(200);
 
     // tell the user
-    echo json_encode(array(API_INFO => "Nothing to update."));
+    echo json_encode(array(API_MESSAGE => "Nothing to update."));
+
+    $logger->info("update user, nothing to update 200");
 }
 // if fields empty - do nothing - to do: treat in front-end
 else if ($user->update($old_pseudo, $old_hash, $fields)) {
@@ -72,16 +70,19 @@ else if ($user->update($old_pseudo, $old_hash, $fields)) {
     // response in json format
     echo json_encode(
         array(
-            API_INFO => "User was updated.",
+            API_MESSAGE => "User was updated.",
             "jwt" => $jwt
         )
     );
+    $logger->info("updated user 200");
 }
 // if unable to update the user, tell the user
 else {
     // set response code - 503 service unavailable
     http_response_code(503);
-
     // tell the user
-    echo json_encode(array(API_INFO => "Unable to update user."));
+    //echo json_encode(array(API_MESSAGE => "Unable to update user."));
+
+    echo API_ERROR;
+    $logger->error("Unable to update user 503");
 }

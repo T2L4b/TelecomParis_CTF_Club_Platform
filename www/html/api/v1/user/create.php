@@ -1,6 +1,4 @@
 <?php
-// API Array key returned message
-define("API_INFO", "message");
 
 // required headers
 header("Access-Control-Allow-Origin: *");
@@ -10,8 +8,13 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 // include database and object files
+require_once '../../../../vendor/autoload.php';
 include_once '../../../../config/SPDO.php';
+include_once '../../../../config/core.php';
 include_once '../objects/user.php';
+
+// init logger
+$logger = new Katzgrau\KLogger\Logger(LOG_PATH);
 
 // prepare connexion and instantiate user object
 $conn = new SPDO();
@@ -34,22 +37,30 @@ if(! (empty($data->pseudo) && empty($data->hash) && empty($data->phone) && empty
         http_response_code(201);
  
         // tell the user
-        echo json_encode(array(API_INFO => "User was created."));
+        echo json_encode(array(API_MESSAGE => CREATED_USER));
+        
+        $logger->info(CREATED_USER);
 
     // if unable to create the user, tell the user
     } else{
         // set response code - 503 service unavailable
         http_response_code(503);
- 
         // tell the user
-        echo json_encode(array(API_INFO => "Unable to create user."));
+        //echo json_encode(array(API_MESSAGE => "Unable to create user."));
+        echo API_ERROR;
+
+        $logger->error("Unable to create user 503");
     }
 } else{ // tell the user data is incomplete
     // set response code - 400 bad request
-    http_response_code(400);
- 
+    //http_response_code(400);
     // tell the user
-    echo json_encode(array(API_INFO => "Unable to create user, data is incomplete."));
+    //echo json_encode(array(API_MESSAGE => "Unable to create user, data is incomplete."));
+
+    http_response_code(503);
+    echo API_ERROR;
+
+    $logger->error("Create user, incomplete or invalid data 400");
 }
 
 ?>

@@ -2,9 +2,11 @@
 // verify authentication
 include_once("../auth/validate_token.php");
 
-include_once '../../../../config/SPDO.php';
 include_once '../objects/challenge.php';
 include_once '../objects/validation.php';
+
+// init logger
+$logger = new Katzgrau\KLogger\Logger(LOG_PATH);
 
 // prepare connexion and instantiate challenge object
 $conn = new SPDO();
@@ -16,8 +18,8 @@ $rest_json = file_get_contents("php://input");
 $idChall = $_POST['chall'];
 $flag = $_POST['flag'];
 
-// FIXME : Remove user once auth ok with jwt
-$pseudo = $_POST['user'];
+// retrieve pseudo with jwt
+$pseudo = $user->pseudo;
 
 // make sure data is not empty
 if (!(empty($idChall) || empty($flag))) {
@@ -37,21 +39,26 @@ if (!(empty($idChall) || empty($flag))) {
     http_response_code(200);
 
     // tell the flag is OK
-    echo json_encode(array("message" => "Flag is valid"));
+    echo json_encode(array(API_MESSAGE => "Flag is valid"));
 
+    $logger->info("Validation flag 200");
   } else {
     // set response code - 200 OK
     http_response_code(200);
 
     // tell the flag is wrong
-    echo json_encode(array("message" => "Flag is not valid"));
+    echo json_encode(array(API_MESSAGE => "Flag is not valid"));
+    
+    $logger->info("Validation wrong flag 200");
   }
 } else { // tell the challenge data is incomplete
   // set response code - 400 bad request
   http_response_code(400);
 
   // tell the challenge
-  echo json_encode(array("message" => "Unable to process flag, data is incomplete."));
+  echo json_encode(array(API_MESSAGE => "Unable to process flag, data is incomplete."));
+
+  $logger->error("Validation invalid data 400");
 }
 
 ?>

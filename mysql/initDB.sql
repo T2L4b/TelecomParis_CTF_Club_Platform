@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS `USERS` (
   `mail` VARCHAR(50) NOT NULL,
   `phone` VARCHAR(12) NOT NULL,
   `status` ENUM('Member', 'Administrator', 'Author') NOT NULL,
+  `score` INT NOT NULL,
   PRIMARY KEY (`pseudo`));
 
 INSERT INTO `USERS` (`pseudo`, `hash`, `mail`, `phone`, `status`, `score`) VALUES

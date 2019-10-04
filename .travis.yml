@@ -28,9 +28,6 @@ before_install:
 
 before_script:
   - docker-compose up -d --build
-  - node --version
-  - npm --version
-  - node_modules/.bin/newman --version
 
 script:
   - node_modules/.bin/newman run tests/ClubCTF_Platform.postman_collection.json -e tests/JWToken.postman_environment.json

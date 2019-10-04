@@ -1,11 +1,12 @@
 <?php
-define("ID_CHALL", "idChall");
 // verify authentication
 include_once("../auth/validate_token.php");
 
-include_once '../../../../config/SPDO.php';
 include_once '../objects/challenge.php';
 include_once '../objects/author.php';
+
+// init logger
+$logger = new Katzgrau\KLogger\Logger(LOG_PATH);
 
 // prepare connexion and instantiate challenge object
 $conn = new SPDO();
@@ -50,23 +51,32 @@ if (!empty($chall) || !empty($_GET[ID_CHALL]) ) {
 
     // set response code - 200 OK
     http_response_code(200);
-
     // show products data in json format
     echo json_encode($challenge_item);
 
+    $logger->info("Challenge read 200");
+
   } else {
     // set response code - 404 Not found 
-    http_response_code(404);
-
+    //http_response_code(404);
     // tell the challenge no products found
-    echo json_encode(array("message" => "No challenge found."));
+    //echo json_encode(array(API_MESSAGE => "No challenge found."));
+
+    http_response_code(503);
+    echo API_ERROR;
+
+    $logger->error("Challenge read not found 404");
   }
 } else { // tell the challenge data is incomplete
   // set response code - 400 bad request
-  http_response_code(400);
-
+  //http_response_code(400);
   // tell the challenge
-  echo json_encode(array("message" => "Unable to read challenge, data is incomplete."));
+  //echo json_encode(array(API_MESSAGE => "Unable to read challenge, data is incomplete."));
+
+  http_response_code(503);
+  echo API_ERROR;
+
+  $logger->error("Challenge read data invalid or incomplete 400");
 }
 
 ?>

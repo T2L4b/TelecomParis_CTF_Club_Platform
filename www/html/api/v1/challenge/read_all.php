@@ -2,11 +2,13 @@
 // verify authentication
 include_once("../auth/validate_token.php");
 
-include_once '../../../../config/SPDO.php';
 include_once '../objects/challenge.php';
 
+// init logger
+$logger = new Katzgrau\KLogger\Logger(LOG_PATH);
+
 $CHALL_CRYPTO = "crypto";
-$CHALL_WEB = "web";
+$CHALL_WEB    = "web";
 
 // prepare connexion and instantiate challenge object
 $conn = new SPDO();
@@ -51,12 +53,18 @@ if ($num > 0) {
     // show products data in json format
     echo json_encode($challenge_arr);
 
+    $logger->info("Challenge read_all 200");
+
 } else {
     // set response code - 404 Not found
-    http_response_code(404);
-
+    //http_response_code(404);
     // tell the challenge no products found
-    echo json_encode(array("message" => "No challenge found."));
+    //echo json_encode(array(API_MESSAGE => "No challenge found."));
+
+  http_response_code(503);
+  echo API_ERROR;
+
+  $logger->error("Challenge read_all not found 404");
 }
 
 ?>
