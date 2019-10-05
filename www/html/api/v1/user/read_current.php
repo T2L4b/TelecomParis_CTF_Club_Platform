@@ -37,7 +37,7 @@ if ($num > 0) {
   // show products data in json format
   echo json_encode($user_arr);
 
-  $logger->info("read_current user 200");
+  $logger->info("User read_current user 200");
 
 } else {
   

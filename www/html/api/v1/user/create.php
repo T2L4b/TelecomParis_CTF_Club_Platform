@@ -10,7 +10,6 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 // include database and object files
 require_once '../../../../vendor/autoload.php';
 include_once '../../../../config/SPDO.php';
-include_once '../../../../config/core.php';
 include_once("../../../../config/filters.php");
 include_once '../objects/user.php';
 
@@ -54,9 +53,9 @@ if(! (empty($data->pseudo) && empty($data->hash) && Filters::validatePhoneNumber
             http_response_code(201);
     
             // tell the user
-            echo json_encode(array(API_MESSAGE => CREATED_USER));
+            echo json_encode(array(API_MESSAGE => "User was created."));
             
-            $logger->info(CREATED_USER);
+            $logger->info("User " . $user->pseudo . " was created from IP " . $_SERVER['REMOTE_ADDR']);
 
         // if unable to create the user, tell the user
         } else {

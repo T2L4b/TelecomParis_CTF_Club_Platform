@@ -12,7 +12,6 @@ define("AUTH_HEADER", "Authorization");
 include_once '../../../../config/SPDO.php';
 include_once '../objects/user.php';
 // required import to decode jwt
-require_once '../../../../config/core.php';
 require_once '../../../../vendor/autoload.php';
 use \Firebase\JWT\JWT;
 // init logger
@@ -74,7 +73,7 @@ if ($jwt) {
     http_response_code(503);
     echo API_ERROR;
 
-    $logger->error("token (invalid?) decode error: " .  $e->getMessage() . " from IP " . $_SERVER['REMOTE_ADDR']);
+    $logger->error("Token (invalid?) decode error: " .  $e->getMessage() . " from IP " . $_SERVER['REMOTE_ADDR']);
 
     exit();
   }
@@ -83,7 +82,7 @@ if ($jwt) {
 } else {
   http_response_code(503);
   echo API_ERROR;
-  $logger->error("token empty 503 from IP " . $_SERVER['REMOTE_ADDR']);
+  $logger->error("Token empty 503 from IP " . $_SERVER['REMOTE_ADDR']);
 
   exit();
 }

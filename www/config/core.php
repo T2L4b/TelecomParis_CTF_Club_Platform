@@ -23,8 +23,6 @@ $exp = time() + (60 * 60); // an hour after
 define("API_MESSAGE", "message"); // API Array key returned message
 define("LOG_PATH", __DIR__ . "/logs"); // filepath of the log file
 define("API_ERROR", "File not found."); // do not display any error - error are displayed in log not in request
-// users string
-define("CREATED_USER", "User was created.");
 // DB strings
 define("ID_CHALL", "idChall");
 
