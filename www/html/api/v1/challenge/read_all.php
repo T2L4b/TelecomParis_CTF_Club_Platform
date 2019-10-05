@@ -56,7 +56,6 @@ if ($num > 0) {
     $logger->info("Challenge read_all 200");
 
 } else {
-
   http_response_code(503);
   echo API_ERROR;
 

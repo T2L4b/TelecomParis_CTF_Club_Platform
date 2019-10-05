@@ -5,8 +5,6 @@ include_once("../auth/validate_token.php");
 // init logger
 $logger = new Katzgrau\KLogger\Logger(LOG_PATH);
 
-$data = json_decode(file_get_contents("php://input"));
-
 // read current user
 $stmt = $user->readCurrent();
 $num  = $stmt->rowCount();
@@ -46,5 +44,5 @@ if ($num > 0) {
   http_response_code(503);
   echo API_ERROR;
 
-  $logger->error("User read_current not found 404");
+  $logger->error("User read_current not found 404 " . $user->pseudo);
 }

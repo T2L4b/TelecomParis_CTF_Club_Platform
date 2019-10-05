@@ -53,14 +53,13 @@ if($user->pseudoExists() && password_verify($data->password, $user->hash)){
               "jwt" => $jwt
           )
       );
-  $logger->info("user logged in 200");
+  $logger->info("User " . $user->pseudo . " logged in 200 from @IP " . $_SERVER['REMOTE_ADDR']);
 
 } else { // login failed
-
   http_response_code(503);
   echo API_ERROR;
   
-  $logger->error("user log in failed 401");
+  $logger->error("User log in failed 401 from IP " . $_SERVER['REMOTE_ADDR']);
 }
 
 ?>

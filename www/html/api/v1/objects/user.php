@@ -111,7 +111,8 @@ class User
 
 
     // check if given pseudo exist in the database
-    function pseudoExists() {
+    function pseudoExists()
+    {
         // query to check if pseudo exists
         $query = "SELECT pseudo, hash FROM " . $this->table_name . " WHERE pseudo = ? LIMIT 0,1";
         $stmt = $this->PDO->prepare($query);
@@ -139,5 +140,35 @@ class User
         return false;
     }
 
+    // check if given email exist in the database
+    function emailExists()
+    {
+        // query to check if email exists
+        $query = "SELECT pseudo, mail, hash FROM " . $this->table_name . " WHERE email = ? LIMIT 0,1";
+        $stmt = $this->PDO->prepare($query);
 
+        // sanitize && bind given email value
+        $this->mail = htmlspecialchars(strip_tags($this->mail));
+        $stmt->bindParam(1, $this->mail);
+
+        $stmt->execute();
+        $num = $stmt->rowCount();
+
+        // if email exists, assign values to object properties for easy access and use for php sessions
+        if ($num > 0) {
+            // get record details / values
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // assign values to object properties
+            $this->pseudo = $row['pseudo'];
+            $this->mail = $row['mail'];
+            $this->hash = $row['hash'];
+
+            // pseudo exists in the database
+            return true;
+        }
+        // pseudo doesn't exist in the database
+        return false;
+    }
+    
 }

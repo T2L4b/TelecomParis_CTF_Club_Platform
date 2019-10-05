@@ -72,17 +72,11 @@ Travis-ci build fail bc of the newman collection, although it runs perfectly fin
 └───────────────────────────────────────────────┘
 ```
 
-## PHP Filters + Issues
-* Filter every user input (body req.)
-* Register with email that is already in DB?
-* Same for pseudo?
-
 ## Code coverage 
 * @TODO with PhpUnit (add to composer)
 
-## Configuration
-* Manage user & permissions (all requests w/ root at the time) /!\
+## Configuration (script)
+* Manage user & permissions (all requests w/ root atm) /!\
 * Change database credentials (root).
 * Script that generate random string in config.php & for credentials.
 * Script - cronjob for apache - mail if file is edited! (checksum?)
-* Dockerize composer?
