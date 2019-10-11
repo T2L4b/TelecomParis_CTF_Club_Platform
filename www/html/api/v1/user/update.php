@@ -14,6 +14,12 @@ $old_hash = $user->hash;
 $logger = new Katzgrau\KLogger\Logger(LOG_PATH);
 
 // set new properties
+/* DANGEROUS IMPLEMENTATION OF METHOD UPDATE IN USER
+   only add the given field - no more otherwise a user
+   that find the api endpont (easy) can change his information
+   easily. Doesn't matter for any current information except
+   the score that always should be change by validation!
+*/
 if (isset($data->pseudo) && (!empty($data->pseudo))) {
     $user->pseudo = $data->pseudo;
     $fields[] = 'pseudo';

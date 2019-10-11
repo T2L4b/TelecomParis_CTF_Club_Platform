@@ -13,13 +13,14 @@ class Filters
 
       $logger = new Katzgrau\KLogger\Logger(LOG_PATH);
       $logger->info("Create user invalid email " . $email);
+      exit();
     }
   }
 
   public static function validatePhoneNumber($phone)
   {
     // phone like 0612345678 or +33612345678
-    if ((!empty($phone)) && (preg_match('/^[0-9]{10}+$/', $phone) || preg_match('^[+]{1}[0-9]{11}+$', $phone)) ) {
+    if ((!empty($phone)) && (preg_match('/^[0-9]{10}+$/', $phone) || preg_match('/^[+]{1}[0-9]{11}+$/', $phone)) ) {
       return true;
      } else {
       http_response_code(503);
@@ -27,6 +28,7 @@ class Filters
 
       $logger = new Katzgrau\KLogger\Logger(LOG_PATH);
       $logger->info("Create user invalid phone number " . $phone);
+      exit();
     }
   }
 

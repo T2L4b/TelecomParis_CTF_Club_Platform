@@ -24,7 +24,7 @@ $user = new User($conn->getConnection());
 $data = json_decode(file_get_contents("php://input"));
 
 // make sure data is not empty
-if(! (empty($data->pseudo) && empty($data->hash) && Filters::validatePhoneNumber($data->phone) && Filters::validateEmail($data->mail))) {
+if( (!empty($data->pseudo)) && isset($data->pseudo) && (!empty($data->hash)) && isset($data->hash) && isset($data->phone) && Filters::validatePhoneNumber($data->phone) && isset($data->mail) && Filters::validateEmail($data->mail)) {
 
     // set user property values
     $user->pseudo = $data->pseudo;
@@ -69,5 +69,5 @@ if(! (empty($data->pseudo) && empty($data->hash) && Filters::validatePhoneNumber
     http_response_code(503);
     echo API_ERROR;
 
-    $logger->error("Create user, incomplete or invalid data 400");
+    $logger->error("Create user, incomplete or invalid data 400 from IP " . $_SERVER['REMOTE_ADDR']);
 }

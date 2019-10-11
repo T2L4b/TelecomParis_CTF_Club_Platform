@@ -56,24 +56,30 @@ Travis-ci build fail bc of the newman collection, although it runs perfectly fin
 ├─────────────────────────┼──────────┼──────────┤
 │              iterations │        1 │        0 │
 ├─────────────────────────┼──────────┼──────────┤
-│                requests │       10 │        0 │
+│                requests │       30 │        0 │
 ├─────────────────────────┼──────────┼──────────┤
-│            test-scripts │       20 │        0 │
+│            test-scripts │       60 │        0 │
 ├─────────────────────────┼──────────┼──────────┤
-│      prerequest-scripts │       10 │        0 │
+│      prerequest-scripts │       30 │        0 │
 ├─────────────────────────┼──────────┼──────────┤
-│              assertions │       10 │        0 │
+│              assertions │       30 │        0 │
 ├─────────────────────────┴──────────┴──────────┤
-│ total run duration: 1620ms                    │
+│ total run duration: 5.1s                      │
 ├───────────────────────────────────────────────┤
-│ total data received: 1.4KB (approx)           │
+│ total data received: 1.69KB (approx)          │
 ├───────────────────────────────────────────────┤
-│ average response time: 115ms                  │
+│ average response time: 127ms                  │
 └───────────────────────────────────────────────┘
 ```
 
 ## Code coverage 
 * @TODO with PhpUnit (add to composer)
+
+## PHP
+* challenge/read - validate ID parameter of chall
+* challenge/validate - recalculate score (/!\ user) after challenge validation
+* PHP Documentation
+* Add auth on login (simple bearer?)
 
 ## Configuration (script)
 * Manage user & permissions (all requests w/ root atm) /!\

@@ -55,6 +55,456 @@
 					"response": []
 				},
 				{
+					"name": "Create User longmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () { pm.response.to.have.status(201); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pseudo\" : \"pseudo-weidmail\",\n    \"hash\" : \"test\",\n    \"mail\" : \"first.last@test-test.com\",\n    \"phone\" : \"0612345678\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"create.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User InvalidEmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pseudo\" : \"pseudo\",\n    \"hash\" : \"test\",\n    \"mail\" : \"thisisnotanemail\",\n    \"phone\" : \"0612345678\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"create.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User invalidPhone",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pseudo\" : \"pseudo\",\n    \"hash\" : \"test\",\n    \"mail\" : \"api@test.com\",\n    \"phone\" : \"KcqpqwdmQWKM>\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"create.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User invalidPhone2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pseudo\" : \"pseudo\",\n    \"hash\" : \"test\",\n    \"mail\" : \"api@test.com\",\n    \"phone\" : \"0249619406942035>\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"create.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User pseudInjection JS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () { pm.response.to.have.status(201); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pseudo\" : \"<script>alert(1);</script>\",\n    \"hash\" : \"test\",\n    \"mail\" : \"api@test.com\",\n    \"phone\" : \"0612345678\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"create.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User pseudInjection SQL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () { pm.response.to.have.status(201); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pseudo\" : \"';SELECT * FROM USERS;\",\n    \"hash\" : \"test\",\n    \"mail\" : \"api@test.com\",\n    \"phone\" : \"0612345678\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"create.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User field missing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pseudo\" : \"pseudo\",\n    \"mail\" : \"api@test.com\",\n    \"phone\" : \"0612345678\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"create.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User field missing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pseudo\" : \"pseudo\",\n    \"hash\" : \"test\",\n    \"mail\" : \"api@test.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"create.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User field missing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"hash\" : \"test\",\n    \"mail\" : \"api@test.com\",\n    \"phone\" : \"0612345678\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"create.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User field missing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pseudo\" : \"pseudo-test\",\n    \"hash\" : \"test\",\n    \"phone\" : \"0612345678\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"create.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Login User",
 					"event": [
 						{
@@ -85,6 +535,190 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"pseudo\": \"pseudo\",\n    \"password\": \"test\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/auth/login.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User invalid creds",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pseudo\": \"pseudo\",\n    \"password\": \"wrongpass\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/auth/login.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/auth/login.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User password only",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"test\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/auth/login.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User pseudo only",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pseudo\": \"pseudo\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8082/api/v1/auth/login.php",
@@ -169,6 +803,332 @@
 					"response": []
 				},
 				{
+					"name": "ReadCurrent User no auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/user/read_current.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"read_current.php"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User invalidScore",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5be1107c-37db-43dc-ab11-2824a86243fc",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"score\" : \"INVALID\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/user/update.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"update.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User score",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5be1107c-37db-43dc-ab11-2824a86243fc",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"score\" : 2000\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/user/update.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"update.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User invalidMail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5be1107c-37db-43dc-ab11-2824a86243fc",
+								"exec": [
+									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pseudo\" : \"R00T\",\r\n    \"hash\" : \"mysuperNEWPASS\",\r\n    \"mail\" : \"notavalidemailaddr\",\r\n    \"phone\" : \"0612345679\",\r\n    \"status\" : \"Administrator\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/user/update.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"update.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User invalidPhone",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5be1107c-37db-43dc-ab11-2824a86243fc",
+								"exec": [
+									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pseudo\" : \"R00T\",\r\n    \"hash\" : \"mysuperNEWPASS\",\r\n    \"mail\" : \"api2@test.com\",\r\n    \"phone\" : \"pomvweQWMCQWL\",\r\n    \"status\" : \"Administrator\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/user/update.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"update.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User no auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5be1107c-37db-43dc-ab11-2824a86243fc",
+								"exec": [
+									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pseudo\" : \"R00T\",\r\n    \"hash\" : \"mysuperNEWPASS\",\r\n    \"mail\" : \"api2@test.com\",\r\n    \"phone\" : \"0612345679\",\r\n    \"status\" : \"Administrator\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/user/update.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"update.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Update User",
 					"event": [
 						{
@@ -195,7 +1155,7 @@
 								}
 							]
 						},
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -206,7 +1166,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"pseudo\" : \"R00T\",\r\n    \"hash\" : \"mysuperNEWPASS\",\r\n    \"mail\" : \"api2@test.com\",\r\n    \"phone\" : \"0612345679\",\r\n    \"status\" : \"Administrator\",\r\n    \"score\" : 2000\r\n}"
+							"raw": "{\r\n    \"pseudo\" : \"R00T\",\r\n    \"hash\" : \"mysuperNEWPASS\",\r\n    \"mail\" : \"api2@test.com\",\r\n    \"phone\" : \"0612345679\",\r\n    \"status\" : \"Administrator\"\r\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8082/api/v1/user/update.php",
