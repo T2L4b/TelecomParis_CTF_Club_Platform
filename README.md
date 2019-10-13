@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://github.com/T2L4b/TelecomParis_CTF_Club_Platform/tree/master/.github/img/logo.png" alt="Telecom Paris CTF Club Platform" width="500" />
+<img src="https://raw.githubusercontent.com/T2L4b/TelecomParis_CTF_Club_Platform/master/.github/logo.png" alt="Telecom Paris CTF Club Platform" width="500" />
 
 [![License](https://img.shields.io/badge/license-AGPLv3-blue.svg?style=flat)](https://github.com/T2L4b/TelecomParis_CTF_Club_Platform/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/T2L4b/TelecomParis_CTF_Club_Platform.svg?branch=master)](https://travis-ci.org/T2L4b/TelecomParis_CTF_Club_Platform)  
