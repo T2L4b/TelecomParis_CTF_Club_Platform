@@ -23,7 +23,7 @@ $data = json_decode(file_get_contents("php://input"));
 // generate json web token
 use \Firebase\JWT\JWT;
 
-if (isset($data->pseudo) && (!(empty($data->pseudo))) && isset($data->password) && (!(empty($data->password)))) {
+if (isset($data->pseudo) && (!(empty($data->pseudo))) && isset($data->password) && (!(empty($data->password))) && isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_USER'] == GENERIC_KEY && $_SERVER['PHP_AUTH_PW'] == GENERIC_PW) {
   // check if user match
   $user->pseudo = $data->pseudo;
 

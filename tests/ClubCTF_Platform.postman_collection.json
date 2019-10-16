@@ -10,14 +10,14 @@
 			"name": "Scenario_Nominal",
 			"item": [
 				{
-					"name": "Create User",
+					"name": "Create User No Generic Auth",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"id": "657236ca-3961-40c0-9974-8c82549dd839",
 								"exec": [
-									"pm.test(\"Status code is 201\", function () { pm.response.to.have.status(201); });"
+									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });"
 								],
 								"type": "text/javascript"
 							}
@@ -38,10 +38,76 @@
 							"raw": "{\n    \"pseudo\" : \"pseudo\",\n    \"hash\" : \"test\",\n    \"mail\" : \"api@test.com\",\n    \"phone\" : \"0612345678\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/create.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"create.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () { pm.response.to.have.status(201); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "CTFAPIGENERIC",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Ua22MTvQoWkEewZWM32hDM8eVDfePR",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pseudo\" : \"pseudo\",\n    \"hash\" : \"test\",\n    \"mail\" : \"api@test.com\",\n    \"phone\" : \"0612345678\"\n}"
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8082/api/v1/user/create.php",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -69,6 +135,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "CTFAPIGENERIC",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Ua22MTvQoWkEewZWM32hDM8eVDfePR",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -83,10 +164,13 @@
 							"raw": "{\n    \"pseudo\" : \"pseudo-weidmail\",\n    \"hash\" : \"test\",\n    \"mail\" : \"first.last@test-test.com\",\n    \"phone\" : \"0612345678\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/create.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -114,6 +198,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "CTFAPIGENERIC",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Ua22MTvQoWkEewZWM32hDM8eVDfePR",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -128,10 +227,13 @@
 							"raw": "{\n    \"pseudo\" : \"pseudo\",\n    \"hash\" : \"test\",\n    \"mail\" : \"thisisnotanemail\",\n    \"phone\" : \"0612345678\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/create.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -159,6 +261,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "CTFAPIGENERIC",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Ua22MTvQoWkEewZWM32hDM8eVDfePR",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -173,10 +290,13 @@
 							"raw": "{\n    \"pseudo\" : \"pseudo\",\n    \"hash\" : \"test\",\n    \"mail\" : \"api@test.com\",\n    \"phone\" : \"KcqpqwdmQWKM>\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/create.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -204,6 +324,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "CTFAPIGENERIC",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Ua22MTvQoWkEewZWM32hDM8eVDfePR",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -218,10 +353,13 @@
 							"raw": "{\n    \"pseudo\" : \"pseudo\",\n    \"hash\" : \"test\",\n    \"mail\" : \"api@test.com\",\n    \"phone\" : \"0249619406942035>\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/create.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -249,6 +387,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "CTFAPIGENERIC",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Ua22MTvQoWkEewZWM32hDM8eVDfePR",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -263,10 +416,13 @@
 							"raw": "{\n    \"pseudo\" : \"<script>alert(1);</script>\",\n    \"hash\" : \"test\",\n    \"mail\" : \"api@test.com\",\n    \"phone\" : \"0612345678\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/create.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -294,6 +450,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "CTFAPIGENERIC",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Ua22MTvQoWkEewZWM32hDM8eVDfePR",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -308,10 +479,13 @@
 							"raw": "{\n    \"pseudo\" : \"';SELECT * FROM USERS;\",\n    \"hash\" : \"test\",\n    \"mail\" : \"api@test.com\",\n    \"phone\" : \"0612345678\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/create.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -339,6 +513,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "CTFAPIGENERIC",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Ua22MTvQoWkEewZWM32hDM8eVDfePR",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -353,10 +542,13 @@
 							"raw": "{\n    \"pseudo\" : \"pseudo\",\n    \"mail\" : \"api@test.com\",\n    \"phone\" : \"0612345678\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/create.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -384,6 +576,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "CTFAPIGENERIC",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Ua22MTvQoWkEewZWM32hDM8eVDfePR",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -398,10 +605,13 @@
 							"raw": "{\n    \"pseudo\" : \"pseudo\",\n    \"hash\" : \"test\",\n    \"mail\" : \"api@test.com\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/create.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -429,6 +639,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "CTFAPIGENERIC",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Ua22MTvQoWkEewZWM32hDM8eVDfePR",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -443,10 +668,13 @@
 							"raw": "{\n    \"hash\" : \"test\",\n    \"mail\" : \"api@test.com\",\n    \"phone\" : \"0612345678\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/create.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -474,6 +702,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "CTFAPIGENERIC",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Ua22MTvQoWkEewZWM32hDM8eVDfePR",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -488,10 +731,13 @@
 							"raw": "{\n    \"pseudo\" : \"pseudo-test\",\n    \"hash\" : \"test\",\n    \"phone\" : \"0612345678\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/create.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/create.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -523,6 +769,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "CTFAPIGENERIC",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Ua22MTvQoWkEewZWM32hDM8eVDfePR",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -537,10 +798,62 @@
 							"raw": "{\n    \"pseudo\": \"pseudo\",\n    \"password\": \"test\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/auth/login.php",
+							"raw": "http://0.0.0.0:8082/api/v1/auth/login.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User No Generic Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pseudo\": \"pseudo\",\n    \"password\": \"test\"\n}"
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8082/api/v1/auth/login.php",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -569,6 +882,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "CTFAPIGENERIC",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Ua22MTvQoWkEewZWM32hDM8eVDfePR",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -583,10 +911,13 @@
 							"raw": "{\n    \"pseudo\": \"pseudo\",\n    \"password\": \"wrongpass\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/auth/login.php",
+							"raw": "http://0.0.0.0:8082/api/v1/auth/login.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -615,6 +946,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "CTFAPIGENERIC",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Ua22MTvQoWkEewZWM32hDM8eVDfePR",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -629,10 +975,13 @@
 							"raw": "{}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/auth/login.php",
+							"raw": "http://0.0.0.0:8082/api/v1/auth/login.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -661,6 +1010,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "CTFAPIGENERIC",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Ua22MTvQoWkEewZWM32hDM8eVDfePR",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -675,10 +1039,13 @@
 							"raw": "{\n    \"password\": \"test\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/auth/login.php",
+							"raw": "http://0.0.0.0:8082/api/v1/auth/login.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -707,6 +1074,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "CTFAPIGENERIC",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Ua22MTvQoWkEewZWM32hDM8eVDfePR",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -721,10 +1103,13 @@
 							"raw": "{\n    \"pseudo\": \"pseudo\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/auth/login.php",
+							"raw": "http://0.0.0.0:8082/api/v1/auth/login.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -779,10 +1164,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/read_current.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/read_current.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -837,10 +1225,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/read_current.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/read_current.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -899,10 +1290,13 @@
 							"raw": "{\r\n    \"score\" : \"INVALID\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/update.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/update.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -954,10 +1348,13 @@
 							"raw": "{\r\n    \"score\" : 2000\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/update.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/update.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -1009,10 +1406,13 @@
 							"raw": "{\r\n    \"pseudo\" : \"R00T\",\r\n    \"hash\" : \"mysuperNEWPASS\",\r\n    \"mail\" : \"notavalidemailaddr\",\r\n    \"phone\" : \"0612345679\",\r\n    \"status\" : \"Administrator\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/update.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/update.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -1064,10 +1464,13 @@
 							"raw": "{\r\n    \"pseudo\" : \"R00T\",\r\n    \"hash\" : \"mysuperNEWPASS\",\r\n    \"mail\" : \"api2@test.com\",\r\n    \"phone\" : \"pomvweQWMCQWL\",\r\n    \"status\" : \"Administrator\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/update.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/update.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -1112,10 +1515,13 @@
 							"raw": "{\r\n    \"pseudo\" : \"R00T\",\r\n    \"hash\" : \"mysuperNEWPASS\",\r\n    \"mail\" : \"api2@test.com\",\r\n    \"phone\" : \"0612345679\",\r\n    \"status\" : \"Administrator\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/update.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/update.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -1169,10 +1575,13 @@
 							"raw": "{\r\n    \"pseudo\" : \"R00T\",\r\n    \"hash\" : \"mysuperNEWPASS\",\r\n    \"mail\" : \"api2@test.com\",\r\n    \"phone\" : \"0612345679\",\r\n    \"status\" : \"Administrator\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/update.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/update.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -1227,10 +1636,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/user/read_current.php",
+							"raw": "http://0.0.0.0:8082/api/v1/user/read_current.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -1275,10 +1687,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/challenge/read.php?idChall=2",
+							"raw": "http://0.0.0.0:8082/api/v1/challenge/read.php?idChall=2",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -1332,10 +1747,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/challenge/read.php?idChall=2",
+							"raw": "http://0.0.0.0:8082/api/v1/challenge/read.php?idChall=2",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -1389,10 +1807,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/challenge/read.php?idChall=-1",
+							"raw": "http://0.0.0.0:8082/api/v1/challenge/read.php?idChall=-1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -1446,10 +1867,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/challenge/read.php",
+							"raw": "http://0.0.0.0:8082/api/v1/challenge/read.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -1497,10 +1921,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/challenge/read_all.php",
+							"raw": "http://0.0.0.0:8082/api/v1/challenge/read_all.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"0",
+								"0",
+								"0",
+								"0"
 							],
 							"port": "8082",
 							"path": [
@@ -1508,6 +1935,79 @@
 								"v1",
 								"challenge",
 								"read_all.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Challenges_Validate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c31723ad-2080-4882-a99d-82cb5658222a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"flag\" :  \"ctvrementfacillol\",\n\t\"idChall\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8082/api/v1/challenge/validate.php",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"challenge",
+								"validate.php"
+							],
+							"query": [
+								{
+									"key": "chall",
+									"value": "",
+									"disabled": true
+								}
 							]
 						}
 					},

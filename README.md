@@ -54,24 +54,25 @@ cd www/ && composer install --no-dev
 
 Travis-ci build fail bc of the newman collection, although it runs perfectly fine locally as shown below:
 ```
+
 ┌─────────────────────────┬──────────┬──────────┐
 │                         │ executed │   failed │
 ├─────────────────────────┼──────────┼──────────┤
 │              iterations │        1 │        0 │
 ├─────────────────────────┼──────────┼──────────┤
-│                requests │       30 │        0 │
+│                requests │       33 │        0 │
 ├─────────────────────────┼──────────┼──────────┤
-│            test-scripts │       60 │        0 │
+│            test-scripts │       66 │        0 │
 ├─────────────────────────┼──────────┼──────────┤
-│      prerequest-scripts │       30 │        0 │
+│      prerequest-scripts │       33 │        0 │
 ├─────────────────────────┼──────────┼──────────┤
-│              assertions │       30 │        0 │
+│              assertions │       33 │        0 │
 ├─────────────────────────┴──────────┴──────────┤
-│ total run duration: 5.1s                      │
+│ total run duration: 7s                        │
 ├───────────────────────────────────────────────┤
-│ total data received: 1.69KB (approx)          │
+│ total data received: 1.74KB (approx)          │
 ├───────────────────────────────────────────────┤
-│ average response time: 127ms                  │
+│ average response time: 175ms                  │
 └───────────────────────────────────────────────┘
 ```
 
@@ -79,13 +80,9 @@ Travis-ci build fail bc of the newman collection, although it runs perfectly fin
 * @TODO with PhpUnit (add to composer)
 
 ## PHP
-* challenge/read - validate ID parameter of chall
-* challenge/validate - recalculate score (/!\ user) after challenge validation
-* PHP Documentation
-* Add auth on login (simple bearer?)
+* Design erro - validation should take idUser not pseudo! (otherwise if pseudo updated evthg is screwed)
 
-## Configuration (script)
+## Configuration
 * Manage user & permissions (all requests w/ root atm) /!\
-* Change database credentials (root).
-* Script that generate random string in config.php & for credentials.
-* Script - cronjob for apache - mail if file is edited! (checksum?)
+* Script that generate random string in core.php, SPO, ... & for credentials.
+* Integrity checker

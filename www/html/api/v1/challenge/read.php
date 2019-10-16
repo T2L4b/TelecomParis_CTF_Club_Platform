@@ -14,7 +14,7 @@ $challenge = new challenge($conn->getConnection());
 $author = new author($conn->getConnection());
 
 // make sure data is not empty
-if (!empty($chall) || !empty($_GET[ID_CHALL]) ) {
+if ( (!empty($_GET[ID_CHALL])) && filter_var($_GET[ID_CHALL], FILTER_VALIDATE_INT) ) {
   // get data from url
   $chall =  $_GET[ID_CHALL];
   // set challenge property values

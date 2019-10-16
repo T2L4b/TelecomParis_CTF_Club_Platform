@@ -14,26 +14,36 @@ $challenge = new challenge($conn->getConnection());
 $validation = new validation($conn->getConnection());
 
 // get data from post request
-$rest_json = file_get_contents("php://input");
-$idChall = $_POST['chall'];
-$flag = $_POST['flag'];
-
-// retrieve pseudo with jwt
-$pseudo = $user->pseudo;
+$data = json_decode(file_get_contents("php://input"));
 
 // make sure data is not empty
-if (!(empty($idChall) || empty($flag))) {
+if ((!empty($data->idChall)) && isset($data->idChall) && (!empty($data->flag)) && isset($data->flag)) {
   // set challenge property values
-  $challenge->idChall = $idChall;
-  $challenge->flag = $flag;
+  $challenge->idChall = $data->idChall;
+  $challenge->flag    = $data->flag;
 
   // verify validity of flag
-  if ($challenge->validate()) {
+  if ($challenge->readCurrent()) {
     
     // add challenge and user to validations table
-    $validation->pseudo = $pseudo;
-    $validation->idChall = $idChall;
+    $validation->pseudo = $user->pseudo; // retrieve pseudo with jwt
+    $validation->idChall = $challenge->idChall;
     $validation->addValidation();
+
+    // retrieve old score
+    $stmt = $user->readCurrent();
+    // retrieve table contents
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        extract($row);
+        $old_score = $score;
+    }
+    
+    // update user score
+    $fields = array();
+    $fields[] = 'score';
+    $user->score = ($old_score + $challenge->points);
+    // update score in database
+    $user->update($user->pseudo, $user->hash, $fields);
 
     // set response code - 200 OK
     http_response_code(200);
@@ -60,5 +70,3 @@ if (!(empty($idChall) || empty($flag))) {
 
   $logger->error("Validation invalid data 400");
 }
-
-?>

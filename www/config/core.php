@@ -26,4 +26,8 @@ define("API_ERROR", "File not found."); // do not display any error - error are 
 // DB strings
 define("ID_CHALL", "idChall");
 
+// generic auth to enter the page
+define("GENERIC_KEY", "CTFAPIGENERIC");
+define("GENERIC_PW", "Ua22MTvQoWkEewZWM32hDM8eVDfePR");
+
 ?>

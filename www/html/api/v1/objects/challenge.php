@@ -55,10 +55,10 @@ class Challenge
         return $stmt;
     }
 
-    // validate flag
-    function validate() {
-        $query = "SELECT idChall type FROM " . $this->table_name . " WHERE idChall LIKE :idChall AND flag LIKE :flag";
-
+    // readCurrent challenge from id and flag
+    function readCurrent() {
+        $query = "SELECT idChall, type, points FROM " . $this->table_name . " WHERE idChall LIKE :idChall AND flag LIKE :flag";
+        
         // prepare query statement
         $stmt = $this->PDO->prepare($query);
 
@@ -72,8 +72,19 @@ class Challenge
 
         // execute query
         $stmt->execute();
+        $num = $stmt->rowCount();
 
-        return $stmt->rowCount() > 0;
+        if ($num > 0) {
+            // get record details / values
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // assign values to object properties
+            $this->idChall = $row['idChall'];
+            $this->type = $row['type'];
+            $this->points = $row['points'];
+        }
+
+        return $num > 0;
     }
 
 }
