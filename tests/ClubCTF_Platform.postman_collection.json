@@ -2012,6 +2012,82 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Challenges_ReValidate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c31723ad-2080-4882-a99d-82cb5658222a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"tests[\"Body matches string\"] = responseBody.has(\"Flag already submitted!\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"flag\" :  \"ctvrementfacillol\",\n\t\"idChall\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8082/api/v1/challenge/validate.php",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"challenge",
+								"validate.php"
+							],
+							"query": [
+								{
+									"key": "chall",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"event": [

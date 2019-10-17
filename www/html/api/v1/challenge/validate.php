@@ -27,6 +27,17 @@ if ((!empty($data->idChall)) && isset($data->idChall) && (!empty($data->flag)) &
     // add challenge and user to validations table
     $validation->idUser = $user->idUser; // retrieve user info with jwt
     $validation->idChall = $challenge->idChall;
+
+    // check if the user already flagged this challenge
+    if ($validation->validationExists()) {
+      // set response code - 200 OK
+      http_response_code(200);
+
+      // tell the flag is OK
+      echo json_encode(array(API_MESSAGE => "Flag already submitted!"));
+      exit();
+    }
+
     $validation->addValidation();
 
     // retrieve old score

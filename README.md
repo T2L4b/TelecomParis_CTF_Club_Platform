@@ -80,7 +80,7 @@ Travis-ci build fail bc of the newman collection, although it runs perfectly fin
 * @TODO with PhpUnit (add to composer)
 
 ## PHP
-* If already flag -> do not increase score 
+* Add author when reading Challenge informations
 
 ## Configuration
 * Manage user & permissions (all requests w/ root atm) /!\
