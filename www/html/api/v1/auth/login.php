@@ -38,7 +38,8 @@ if (isset($data->pseudo) && (!(empty($data->pseudo))) && isset($data->password) 
       "exp" => $exp,
       "data" => array(
         "pseudo" => $user->pseudo,
-        "hash" => $user->hash
+        "hash" => $user->hash,
+        "idUser" => $user->idUser
       )
     );
 

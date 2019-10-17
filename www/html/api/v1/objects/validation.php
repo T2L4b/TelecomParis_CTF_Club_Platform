@@ -6,7 +6,7 @@ class Validation
     private $table_name = "VALIDATIONS";
 
     // object properties
-    public $pseudo;
+    public $idUser;
     public $idChall;
 
     // constructor with $db as database connection
@@ -17,19 +17,19 @@ class Validation
 
     // add a validation
     function addValidation() {
-        $query = "INSERT INTO " . $this->table_name . " (pseudo, idChall)
-        VALUES (:pseudo, :idChall)";
+        $query = "INSERT INTO " . $this->table_name . " (idUser, idChall)
+        VALUES (:idUser, :idChall)";
 
         // prepare query statement
         $stmt = $this->PDO->prepare($query);
 
         // sanitize
         $this->idChall = htmlspecialchars(strip_tags($this->idChall));
-        $this->pseudo = htmlspecialchars(strip_tags($this->pseudo));
+        $this->idUser = htmlspecialchars(strip_tags($this->idUser));
 
         // bind param
         $stmt->bindParam(":idChall", $this->idChall);
-        $stmt->bindParam(":pseudo", $this->pseudo);
+        $stmt->bindParam(":idUser", $this->idUser);
 
         // execute query
         $stmt->execute();

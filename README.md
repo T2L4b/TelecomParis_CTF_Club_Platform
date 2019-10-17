@@ -80,7 +80,7 @@ Travis-ci build fail bc of the newman collection, although it runs perfectly fin
 * @TODO with PhpUnit (add to composer)
 
 ## PHP
-* Design erro - validation should take idUser not pseudo! (otherwise if pseudo updated evthg is screwed)
+* If already flag -> do not increase score 
 
 ## Configuration
 * Manage user & permissions (all requests w/ root atm) /!\

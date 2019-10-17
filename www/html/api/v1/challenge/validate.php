@@ -24,9 +24,8 @@ if ((!empty($data->idChall)) && isset($data->idChall) && (!empty($data->flag)) &
 
   // verify validity of flag
   if ($challenge->readCurrent()) {
-    
     // add challenge and user to validations table
-    $validation->pseudo = $user->pseudo; // retrieve pseudo with jwt
+    $validation->idUser = $user->idUser; // retrieve user info with jwt
     $validation->idChall = $challenge->idChall;
     $validation->addValidation();
 

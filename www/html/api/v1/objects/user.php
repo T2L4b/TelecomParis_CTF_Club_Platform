@@ -6,6 +6,7 @@ class User
     private $table_name = "USERS";
 
     // object properties
+    public $idUser;
     public $pseudo;
     public $hash;
     public $mail;
@@ -56,7 +57,7 @@ class User
     {
         // only the required fields should be displayed to the user
         // limit to 1 even if pseudo is a unique identifier
-        $query = "SELECT pseudo, hash, phone, mail, status, score FROM " . $this->table_name . " WHERE pseudo = :pseudo AND hash = :hash LIMIT 1";
+        $query = "SELECT idUser, pseudo, hash, phone, mail, status, score FROM " . $this->table_name . " WHERE pseudo = :pseudo AND hash = :hash LIMIT 1";
 
         // prepare query statement
         $stmt = $this->PDO->prepare($query);
@@ -113,7 +114,7 @@ class User
     function pseudoExists()
     {
         // query to check if pseudo exists
-        $query = "SELECT pseudo, hash FROM " . $this->table_name . " WHERE pseudo = ? LIMIT 0,1";
+        $query = "SELECT idUser, pseudo, hash FROM " . $this->table_name . " WHERE pseudo = ? LIMIT 0,1";
         $stmt = $this->PDO->prepare($query);
 
         // sanitize && bind given pseudo value
@@ -131,6 +132,7 @@ class User
             // assign values to object properties
             $this->pseudo = $row['pseudo'];
             $this->hash = $row['hash'];
+            $this->idUser = $row['idUser'];
 
             // pseudo exists in the database
             return true;

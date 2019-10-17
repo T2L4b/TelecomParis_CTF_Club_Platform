@@ -65,6 +65,7 @@ if ($jwt) {
     $user = new User($conn->getConnection());
     $user->pseudo = $decoded->data->pseudo;
     $user->hash   = $decoded->data->hash;
+    $user->idUser = $decoded->data->idUser;
 
     // if decode fails, it means jwt is invalid
   } catch (Exception $e) {

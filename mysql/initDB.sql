@@ -40,22 +40,22 @@ INSERT INTO `CHALLENGES` (`type`,`title`,`statement`,`points`,`difficulty`, `fla
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AUTHORS` (
   `idChall` int NOT NULL,
-  `pseudo` VARCHAR(25) NOT NULL,
-  PRIMARY KEY (`idChall`, `pseudo`));
+  `idUser` VARCHAR(25) NOT NULL,
+  PRIMARY KEY (`idChall`, `idUser`));
 
-INSERT INTO `AUTHORS` (`idChall`,`pseudo`) VALUES
-('1', 'JackPepper');
+INSERT INTO `AUTHORS` (`idChall`,`idUser`) VALUES
+('1', '1');
 
-INSERT INTO `AUTHORS` (`idChall`,`pseudo`) VALUES
-('1', 'T2lab');
+INSERT INTO `AUTHORS` (`idChall`,`idUser`) VALUES
+('1', '2');
 
-INSERT INTO `AUTHORS` (`idChall`,`pseudo`) VALUES
-('2', 'hey hey');
+INSERT INTO `AUTHORS` (`idChall`,`idUser`) VALUES
+('2', '1');
 
 -- -----------------------------------------------------
 -- Table `VALIDATIONS`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `VALIDATIONS` (
-  `pseudo` VARCHAR(25) NOT NULL,
+  `idUser` VARCHAR(25) NOT NULL,
   `idChall` int NOT NULL,
-  PRIMARY KEY (`pseudo`, `idChall`));
+  PRIMARY KEY (`idUser`, `idChall`));

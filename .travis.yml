@@ -27,7 +27,7 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 before_script:
-  - docker-compose up -d --build && sleep 10
+  - docker-compose up -d --build && sleep 60 # wait for the mysql container to be ready to accept connexions
 
 script:
   - node_modules/.bin/newman run tests/ClubCTF_Platform.postman_collection.json -e tests/JWToken.postman_environment.json

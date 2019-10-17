@@ -42,12 +42,12 @@ if ( (!empty($_GET[ID_CHALL])) && filter_var($_GET[ID_CHALL], FILTER_VALIDATE_IN
     );
 
     // retrieve author(s)
-    $author->idChall = $idChall;
+    /*$author->idChall = $idChall;
     $author_stmt = $author->readAuthors();
     $challenge_item["authors"] = array();
     while ($author_row = $author_stmt->fetch(PDO::FETCH_ASSOC)) {
       array_push($challenge_item["authors"], $author_row["pseudo"]);
-    }
+    }*/
 
     // set response code - 200 OK
     http_response_code(200);

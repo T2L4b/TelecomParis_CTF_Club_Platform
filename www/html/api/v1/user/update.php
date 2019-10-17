@@ -73,7 +73,8 @@ else if ($user->update($old_pseudo, $old_hash, $fields)) {
         "nbf" => $nbf,
         "data" => array(
             "pseudo" => $user->pseudo,
-            "hash" => $user->hash
+            "hash" => $user->hash,
+            "idUser" => $user->idUser
         )
     );
     $jwt = JWT::encode($token, $key);

@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "947e812a-a266-40e1-8738-445537c7f4bf",
-		"name": "ClubCTF_Platform LOCAL",
+		"name": "ClubCTF_Platform",
 		"description": "Postman test collection for the TP_CTF_Club of the ClubCTF_Platform.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},

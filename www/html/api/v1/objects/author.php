@@ -6,7 +6,7 @@ class Author
     private $table_name = "AUTHORS";
 
     // object properties
-    public $pseudo;
+    public $idUser;
     public $idChall;
 
     // constructor with $db as database connection
@@ -17,7 +17,7 @@ class Author
 
     // read authors
     function readAuthors() {
-        $query = "SELECT pseudo FROM " . $this->table_name . " WHERE idChall LIKE :idChall";
+        $query = "SELECT idUser FROM " . $this->table_name . " WHERE idChall LIKE :idChall";
 
         // prepare query statement
         $stmt = $this->PDO->prepare($query);
@@ -36,16 +36,16 @@ class Author
 
     // read challenges
     function readChallenges() {
-        $query = "SELECT idChall FROM " . $this->table_name . " WHERE pseudo LIKE :pseudo";
+        $query = "SELECT idChall FROM " . $this->table_name . " WHERE idUser LIKE :idUser";
 
         // prepare query statement
         $stmt = $this->PDO->prepare($query);
 
         // sanitize
-        $this->pseudo = htmlspecialchars(strip_tags($this->pseudo));
+        $this->idUser = htmlspecialchars(strip_tags($this->idUser));
 
         // bind param
-        $stmt->bindParam(":pseudo", $this->pseudo);
+        $stmt->bindParam(":idUser", $this->idUser);
 
         // execute query
         $stmt->execute();
