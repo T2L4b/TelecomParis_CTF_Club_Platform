@@ -4,11 +4,9 @@
 
 [![License](https://img.shields.io/badge/license-AGPLv3-blue.svg?style=flat)](https://github.com/T2L4b/TelecomParis_CTF_Club_Platform/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/T2L4b/TelecomParis_CTF_Club_Platform.svg?branch=master)](https://travis-ci.org/T2L4b/TelecomParis_CTF_Club_Platform)  
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=T2L4b_TelecomParis_CTF_Club_Platform&metric=alert_status)](https://sonarcloud.io/dashboard?id=T2L4b_TelecomParis_CTF_Club_Platform)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=T2L4b_TelecomParis_CTF_Club_Platform&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=T2L4b_TelecomParis_CTF_Club_Platform)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=T2L4b_TelecomParis_CTF_Club_Platform&metric=security_rating)](https://sonarcloud.io/dashboard?id=T2L4b_TelecomParis_CTF_Club_Platform)  
 [![Maintainability](https://api.codeclimate.com/v1/badges/181c9606f1540b8c7810/maintainability)](https://codeclimate.com/github/T2L4b/TelecomParis_CTF_Club_Platform/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/181c9606f1540b8c7810/test_coverage)](https://codeclimate.com/github/T2L4b/TelecomParis_CTF_Club_Platform/test_coverage)
 
 # :construction: ClubCTF_Platform :construction:
 
@@ -28,12 +26,12 @@ cd www/ && composer install --no-dev
 [@T2L4b](https://github.com/T2L4b)  
 <img src="https://avatars2.githubusercontent.com/u/50122584?s=460&v=4" alt="T2L4b avatar" width="75" />  
 
-## Backers
+## Integration Front/Back
 
 [@JackPepper](https://github.com/JackPepper)  
 <img src="https://avatars2.githubusercontent.com/u/24301234?s=460&v=4" alt="JackPepper avatar" width="75" />  
 
-## Front Developers
+## Front-End Developers
 [>>> You'll find the Front repository here <<<](https://github.com/nima3333/club_ctf_front/)
 
 [@nima3333](https://github.com/nima3333)  
@@ -48,10 +46,7 @@ cd www/ && composer install --no-dev
 
 </div>
 
-# @ToDo
-
-## Code coverage 
-* @TODO with PhpUnit (add to composer)
+# About
 
 ## Configuration
 * Manage user & permissions (all requests w/ root atm) /!\
