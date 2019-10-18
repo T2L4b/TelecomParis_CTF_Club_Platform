@@ -44,7 +44,7 @@ class Challenge
     // read all challenges
     function readAll() {
         // only the required fields should be displayed to the user
-        $query = "SELECT idChall, title, type FROM " . $this->table_name;
+        $query = "SELECT idChall, title, type, statement, points, difficulty, url FROM " . $this->table_name;
 
         // prepare query statement
         $stmt = $this->PDO->prepare($query);

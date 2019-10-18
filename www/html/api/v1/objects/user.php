@@ -115,6 +115,7 @@ class User
     {
         // query to check if pseudo exists
         $query = "SELECT idUser, pseudo, hash FROM " . $this->table_name . " WHERE pseudo = ? LIMIT 0,1";
+        
         $stmt = $this->PDO->prepare($query);
 
         // sanitize && bind given pseudo value

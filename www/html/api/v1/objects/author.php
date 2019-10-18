@@ -15,41 +15,20 @@ class Author
         $this->PDO = $db;
     }
 
-    // read authors
-    function readAuthors() {
-        $query = "SELECT idUser FROM " . $this->table_name . " WHERE idChall LIKE :idChall";
+    function readChallengeAuthors() {
+        $query = "SELECT idChall, pseudo FROM " . $this->table_name . " INNER JOIN USERS USING (idUser) WHERE idChall = :idChall";
 
         // prepare query statement
         $stmt = $this->PDO->prepare($query);
 
         // sanitize
         $this->idChall = htmlspecialchars(strip_tags($this->idChall));
-
         // bind param
         $stmt->bindParam(":idChall", $this->idChall);
 
         // execute query
         $stmt->execute();
-
-        return $stmt;
-    }
-
-    // read challenges
-    function readChallenges() {
-        $query = "SELECT idChall FROM " . $this->table_name . " WHERE idUser LIKE :idUser";
-
-        // prepare query statement
-        $stmt = $this->PDO->prepare($query);
-
-        // sanitize
-        $this->idUser = htmlspecialchars(strip_tags($this->idUser));
-
-        // bind param
-        $stmt->bindParam(":idUser", $this->idUser);
-
-        // execute query
-        $stmt->execute();
-
+        
         return $stmt;
     }
 

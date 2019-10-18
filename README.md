@@ -50,10 +50,19 @@ cd www/ && composer install --no-dev
 
 # @ToDo
 
-## Fix travis-ci build
+## Code coverage 
+* @TODO with PhpUnit (add to composer)
 
-Travis-ci build fail bc of the newman collection, although it runs perfectly fine locally as shown below:
+## Configuration
+* Manage user & permissions (all requests w/ root atm) /!\
+* Script that generate random string in core.php, SPO, ... & for credentials.
+* Integrity checker
+
+## Newman tests
+
+Travis-ci issue when executing the newman collection: issue reported - waiting for an answer.
 ```
+newman run tests/ClubCTF_Platform.postman_collection.json -e tests/JWToken.postman_environment.json
 
 ┌─────────────────────────┬──────────┬──────────┐
 │                         │ executed │   failed │
@@ -75,14 +84,3 @@ Travis-ci build fail bc of the newman collection, although it runs perfectly fin
 │ average response time: 175ms                  │
 └───────────────────────────────────────────────┘
 ```
-
-## Code coverage 
-* @TODO with PhpUnit (add to composer)
-
-## PHP
-* Add author when reading Challenge informations
-
-## Configuration
-* Manage user & permissions (all requests w/ root atm) /!\
-* Script that generate random string in core.php, SPO, ... & for credentials.
-* Integrity checker

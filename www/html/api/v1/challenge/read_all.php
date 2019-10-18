@@ -30,8 +30,12 @@ if ($num > 0) {
         extract($row);
 
         $challenge_item = array(
-        "idChall"     => $idChall,
-        "title"       => $title
+        "idChall"    => $idChall,
+        "title"      => $title,
+        "statement"  => $statement,
+        "points"     => $points,
+        "difficulty" => $difficulty,
+        "url"        => $url
         );
 
         // put the challenge in the appropriate array
