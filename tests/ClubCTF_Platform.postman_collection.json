@@ -499,6 +499,69 @@
 					"response": []
 				},
 				{
+					"name": "Create User pseudInjection SQL Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "657236ca-3961-40c0-9974-8c82549dd839",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () { pm.response.to.have.status(201); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "CTFAPIGENERIC",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Ua22MTvQoWkEewZWM32hDM8eVDfePR",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pseudo\" : \"';DROP TABLE USERS;\",\n    \"hash\" : \"test\",\n    \"mail\" : \"api@test.com\",\n    \"phone\" : \"0612345678\"\n}"
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8082/api/v1/user/create.php",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"create.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create User field missing",
 					"event": [
 						{
@@ -825,7 +888,7 @@
 							"script": {
 								"id": "657236ca-3961-40c0-9974-8c82549dd839",
 								"exec": [
-									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });",
+									"pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });",
 									""
 								],
 								"type": "text/javascript"
@@ -874,7 +937,7 @@
 							"script": {
 								"id": "657236ca-3961-40c0-9974-8c82549dd839",
 								"exec": [
-									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });",
+									"pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });",
 									""
 								],
 								"type": "text/javascript"
@@ -938,7 +1001,7 @@
 							"script": {
 								"id": "657236ca-3961-40c0-9974-8c82549dd839",
 								"exec": [
-									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });",
+									"pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });",
 									""
 								],
 								"type": "text/javascript"
@@ -1002,7 +1065,7 @@
 							"script": {
 								"id": "657236ca-3961-40c0-9974-8c82549dd839",
 								"exec": [
-									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });",
+									"pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });",
 									""
 								],
 								"type": "text/javascript"
@@ -1066,7 +1129,7 @@
 							"script": {
 								"id": "657236ca-3961-40c0-9974-8c82549dd839",
 								"exec": [
-									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });",
+									"pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });",
 									""
 								],
 								"type": "text/javascript"
@@ -1198,7 +1261,7 @@
 							"script": {
 								"id": "657236ca-3961-40c0-9974-8c82549dd839",
 								"exec": [
-									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });"
+									"pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });"
 								],
 								"type": "text/javascript"
 							}
@@ -1491,7 +1554,7 @@
 							"script": {
 								"id": "5be1107c-37db-43dc-ab11-2824a86243fc",
 								"exec": [
-									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });"
+									"pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });"
 								],
 								"type": "text/javascript"
 							}
@@ -1670,7 +1733,7 @@
 							"script": {
 								"id": "c31723ad-2080-4882-a99d-82cb5658222a",
 								"exec": [
-									"pm.test(\"Status code is 503\", function () { pm.response.to.have.status(503); });"
+									"pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });"
 								],
 								"type": "text/javascript"
 							}
@@ -1766,6 +1829,66 @@
 								{
 									"key": "idChall",
 									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Challenges_Read_Success Copy Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c31723ad-2080-4882-a99d-82cb5658222a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8082/api/v1/challenge/read.php?idChall=1",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"challenge",
+								"read.php"
+							],
+							"query": [
+								{
+									"key": "idChall",
+									"value": "1"
 								}
 							]
 						}
@@ -2077,6 +2200,80 @@
 								"v1",
 								"challenge",
 								"validate.php"
+							],
+							"query": [
+								{
+									"key": "chall",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User ReadScore HoF",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c31723ad-2080-4882-a99d-82cb5658222a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8082/api/v1/user/rankAll.php",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"rankAll.php"
 							],
 							"query": [
 								{

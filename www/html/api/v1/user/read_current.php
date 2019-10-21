@@ -7,9 +7,11 @@ $logger = new Katzgrau\KLogger\Logger(LOG_PATH);
 
 // read current user
 $stmt = $user->readCurrent();
+// read user rank
+$usr_rank = $user->readRank();
 $num  = $stmt->rowCount();
 
-// check if more than 0 record found
+// check if more than 0 record found (rank request also made on pseudo so no double check)
 if ($num > 0) {
   // user array
   $user_arr = array();
@@ -25,7 +27,8 @@ if ($num > 0) {
       "phone"   => $phone,
       "mail"    => $mail,
       "status"  => $status,
-      "score"   => $score
+      "score"   => $score,
+      "rank"    => $usr_rank
     );
 
     array_push($user_arr["records"], $user_item);
@@ -33,8 +36,6 @@ if ($num > 0) {
 
   // set response code - 200 OK
   http_response_code(200);
-
-  // show products data in json format
   echo json_encode($user_arr);
 
   $logger->info("User read_current user 200");

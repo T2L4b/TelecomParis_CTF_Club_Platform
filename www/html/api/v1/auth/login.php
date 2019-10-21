@@ -56,13 +56,13 @@ if (isset($data->pseudo) && (!(empty($data->pseudo))) && isset($data->password) 
     );
     $logger->info("User " . $user->pseudo . " logged in 200 from @IP " . $_SERVER['REMOTE_ADDR']);
   } else {
-    http_response_code(503);
+    http_response_code(404);
     echo API_ERROR;
   
     $logger->error("User log in failed (invalid credentials) 401 from IP " . $_SERVER['REMOTE_ADDR']);
   }
 } else { // login failed
-  http_response_code(503);
+  http_response_code(404);
   echo API_ERROR;
 
   $logger->error("User log in failed (invalid unset or empty data) 401 from IP " . $_SERVER['REMOTE_ADDR']);

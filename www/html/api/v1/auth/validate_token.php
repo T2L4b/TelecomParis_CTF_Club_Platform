@@ -71,7 +71,7 @@ if ($jwt) {
   } catch (Exception $e) {
 
     // set response code
-    http_response_code(503);
+    http_response_code(404);
     echo API_ERROR;
 
     $logger->error("Token (invalid?) decode error: " .  $e->getMessage() . " from IP " . $_SERVER['REMOTE_ADDR']);
@@ -81,7 +81,7 @@ if ($jwt) {
 
   // show error message if jwt is empty
 } else {
-  http_response_code(503);
+  http_response_code(404);
   echo API_ERROR;
   $logger->error("Token empty 503 from IP " . $_SERVER['REMOTE_ADDR']);
 

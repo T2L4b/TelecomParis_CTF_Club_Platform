@@ -32,7 +32,7 @@ cd www/ && composer install --no-dev
 <img src="https://avatars2.githubusercontent.com/u/24301234?s=460&v=4" alt="JackPepper avatar" width="75" />  
 
 ## Front-End Developers
-[>>> You'll find the Front repository here <<<](https://github.com/nima3333/club_ctf_front/)
+[>>> You'll find the Front (separate repository) here <<<](https://github.com/nima3333/club_ctf_front/)
 
 [@nima3333](https://github.com/nima3333)  
 <img src="https://avatars2.githubusercontent.com/u/7372240?s=460&v=4" alt="nima3333 avatar" width="75" />
@@ -46,12 +46,13 @@ cd www/ && composer install --no-dev
 
 </div>
 
-# About
+# About this PoC (Proof of Concept)
 
-## Configuration
+## Ideas of features (@ToDo)
+* Multilingual support (+ choose a language -> front?)
 * Manage user & permissions (all requests w/ root atm) /!\
-* Script that generate random string in core.php, SPO, ... & for credentials.
-* Integrity checker
+* Random string generator for core.php, SPDO, ... (for credentials)
+* Add PHPUnit testing, Postman testing + (re)add them in the Travis-CI build
 
 ## Newman tests
 
@@ -64,18 +65,18 @@ newman run tests/ClubCTF_Platform.postman_collection.json -e tests/JWToken.postm
 ├─────────────────────────┼──────────┼──────────┤
 │              iterations │        1 │        0 │
 ├─────────────────────────┼──────────┼──────────┤
-│                requests │       33 │        0 │
+│                requests │       37 │        0 │
 ├─────────────────────────┼──────────┼──────────┤
-│            test-scripts │       66 │        0 │
+│            test-scripts │       74 │        0 │
 ├─────────────────────────┼──────────┼──────────┤
-│      prerequest-scripts │       33 │        0 │
+│      prerequest-scripts │       37 │        0 │
 ├─────────────────────────┼──────────┼──────────┤
-│              assertions │       33 │        0 │
+│              assertions │       38 │        0 │
 ├─────────────────────────┴──────────┴──────────┤
-│ total run duration: 7s                        │
+│ total run duration: 6.4s                      │
 ├───────────────────────────────────────────────┤
-│ total data received: 1.74KB (approx)          │
+│ total data received: 2.56KB (approx)          │
 ├───────────────────────────────────────────────┤
-│ average response time: 175ms                  │
+│ average response time: 136ms                  │
 └───────────────────────────────────────────────┘
 ```

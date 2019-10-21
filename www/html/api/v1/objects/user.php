@@ -172,5 +172,40 @@ class User
         // pseudo doesn't exist in the database
         return false;
     }
+
+    // get the rank for all user - Hall of Fame data
+    function readAllRanks() {
+        $query = "SELECT pseudo, score FROM " . $this->table_name . " ORDER BY score DESC LIMIT 300";
+
+        // prepare query statement
+        $stmt = $this->PDO->prepare($query);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+    function readRank() {
+        $query = "SELECT x.position, x.pseudo, x.score FROM (SELECT t.score, t.pseudo, @rownum := @rownum + 1 AS position FROM " . $this->table_name . " t JOIN (SELECT @rownum := 0) r ORDER BY t.score DESC) x WHERE x.pseudo = :pseudo LIMIT 1";
+
+        // prepare query statement
+        $stmt = $this->PDO->prepare($query);
+
+        // bind param
+        $stmt->bindParam(":pseudo", $this->pseudo);
+
+        // execute query
+        $stmt->execute();
+        $num = $stmt->rowCount();
+
+        // if user exists return rank
+        if ($num > 0) {
+            // get record details / values
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row['position'];
+        }
+        return false;
+    }
     
 }
