@@ -17,8 +17,8 @@ class Validation
 
     // add a validation
     function addValidation() {
-        $query = "INSERT INTO " . $this->table_name . " (idUser, idChall)
-        VALUES (:idUser, :idChall)";
+        $query = "INSERT INTO " . $this->table_name . " (idUser, idChall, validationDate)
+        VALUES (:idUser, :idChall, NOW())";
 
         // prepare query statement
         $stmt = $this->PDO->prepare($query);
@@ -56,4 +56,20 @@ class Validation
         // validation doesn't exist in the database
         return false;
     }
+
+    function readValidations($pseudo) {
+        $query = "SELECT pseudo, validationDate, type, title, points, difficulty FROM VALIDATIONS INNER JOIN CHALLENGES ON VALIDATIONS.idChall = CHALLENGES.idChall INNER JOIN USERS ON VALIDATIONS.idUser = USERS.idUser WHERE USERS.pseudo = :pseudo";
+
+        // prepare query statement
+        $stmt = $this->PDO->prepare($query);
+
+        // pseudo sanitized at login - bind param
+        $stmt->bindParam(":pseudo", $pseudo);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
+
 }

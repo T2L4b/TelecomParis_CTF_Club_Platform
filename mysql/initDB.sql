@@ -19,7 +19,7 @@ INSERT INTO `USERS` (`pseudo`, `hash`, `mail`, `phone`, `status`, `score`) VALUE
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CHALLENGES` (
   `idChall` int NOT NULL AUTO_INCREMENT,
-  `type` ENUM('web', 'crypto') NOT NULL,
+  `type` ENUM('dev', 'web', 'reverse', 'forensics', 'crypto', 'networking') NOT NULL,
   `title` VARCHAR(35) NOT NULL,
   `statement` LONGTEXT NOT NULL,
   `points` int NOT NULL,
@@ -58,4 +58,5 @@ INSERT INTO `AUTHORS` (`idChall`,`idUser`) VALUES
 CREATE TABLE IF NOT EXISTS `VALIDATIONS` (
   `idUser` VARCHAR(25) NOT NULL,
   `idChall` int NOT NULL,
+  `validationDate` DATETIME NOT NULL,
   PRIMARY KEY (`idUser`, `idChall`));

@@ -65,18 +65,18 @@ newman run tests/ClubCTF_Platform.postman_collection.json -e tests/JWToken.postm
 ├─────────────────────────┼──────────┼──────────┤
 │              iterations │        1 │        0 │
 ├─────────────────────────┼──────────┼──────────┤
-│                requests │       37 │        0 │
+│                requests │       38 │        0 │
 ├─────────────────────────┼──────────┼──────────┤
-│            test-scripts │       74 │        0 │
+│            test-scripts │       76 │        0 │
 ├─────────────────────────┼──────────┼──────────┤
-│      prerequest-scripts │       37 │        0 │
+│      prerequest-scripts │       38 │        0 │
 ├─────────────────────────┼──────────┼──────────┤
-│              assertions │       38 │        0 │
+│              assertions │       39 │        0 │
 ├─────────────────────────┴──────────┴──────────┤
-│ total run duration: 6.4s                      │
+│ total run duration: 6.3s                      │
 ├───────────────────────────────────────────────┤
-│ total data received: 2.56KB (approx)          │
+│ total data received: 2.71KB (approx)          │
 ├───────────────────────────────────────────────┤
-│ average response time: 136ms                  │
+│ average response time: 131ms                  │
 └───────────────────────────────────────────────┘
 ```
