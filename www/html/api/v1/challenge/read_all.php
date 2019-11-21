@@ -39,10 +39,10 @@ if ($num > 0) {
 
         $challenge_item = array(
         "idChall"    => $idChall,
-        "title"      => $title,
-        "statement"  => $statement,
+        "title"      => utf8_decode($title),
+        "statement"  => utf8_decode($statement),
         "points"     => $points,
-        "difficulty" => $difficulty,
+        "difficulty" => utf8_decode($difficulty),
         "url"        => $url
         );
 

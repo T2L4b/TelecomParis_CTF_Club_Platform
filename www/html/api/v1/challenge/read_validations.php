@@ -21,12 +21,12 @@ if ($num > 0) {
     extract($row);
 
     $validation_item = array(
-      "pseudo"          => $pseudo,
+      "pseudo"          => utf8_decode($pseudo),
       "validationDate"  => $validationDate,
-      "type"            => $type,
-      "title"           => $title,
+      "type"            => utf8_decode($type),
+      "title"           => utf8_decode($title),
       "points"          => $points,
-      "difficulty"      => $difficulty
+      "difficulty"      => utf8_decode($difficulty)
     );
 
     array_push($validations_arr["records"], $validation_item);
